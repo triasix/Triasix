@@ -5,145 +5,170 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Triasix Capital Group | Ventanas en Aluminio y Vidrio</title>
 
-<style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-body{
-font-family:Arial, Helvetica, sans-serif;
-margin:0;
-background:#f5f7fb;
-color:#222;
+<style>
+*{box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;margin:0;background:#0b0b0b;color:#e5e5e5}
+
+/* BARRA DE PROGRESO */
+#progressBar{
+position:fixed;
+top:0;
+left:0;
+height:4px;
+background:#25D366;
+width:0%;
+z-index:9999
 }
 
+/* HEADER */
 header{
-background:#0f172a;
-color:white;
-padding:15px 20px;
+background:transparent;
+border-bottom:1px solid transparent;
+padding:15px 30px;
 position:sticky;
 top:0;
-z-index:1000;
+z-index:10;
+transition:.35s
 }
 
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-max-width:1200px;
-margin:auto;
+header.scrolled{
+background:#000;
+border-bottom:1px solid #1f1f1f;
+box-shadow:0 5px 20px rgba(0,0,0,.6)
 }
 
-.logo{
-display:flex;
-align-items:center;
-gap:10px;
+nav{display:flex;justify-content:space-between;align-items:center;max-width:1300px;margin:auto}
+
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:white}
+.logo img{height:64px;object-fit:contain}
+
+/* LOGO PREMIUM */
+.logo strong{
+font-size:20px;
+letter-spacing:1.5px;
+font-weight:600
 }
 
-.logo img{
-height:45px;
-}
+nav a{color:#ccc;margin-left:28px;text-decoration:none;font-weight:500;transition:.3s}
+nav a:hover{color:white}
 
-nav a{
-color:white;
-margin-left:25px;
-text-decoration:none;
-font-weight:bold;
-}
-
+/* HERO */
 .hero{
-background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url("portada.jpg");
+background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),url("portada.jpg");
 background-size:cover;
-background-position:center;
-color:white;
-padding:140px 20px;
+background-position:center center;
+background-repeat:no-repeat;
+min-height:100vh;
+width:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 text-align:center;
+padding:40px 20px
 }
 
 .hero h1{
-font-size:42px;
-margin-bottom:10px;
+font-size:clamp(34px,6vw,64px);
+margin-bottom:15px;
+font-weight:700;
+letter-spacing:1px
 }
 
 .hero p{
-font-size:20px;
-margin-bottom:30px;
+font-size:clamp(16px,2.2vw,22px);
+max-width:700px;
+color:#d0d0d0;
+margin-bottom:35px
 }
+
+.hero h1{font-size:56px;margin-bottom:10px;font-weight:700}
+.hero p{font-size:20px;color:#d0d0d0;margin-bottom:35px}
 
 .btn{
 background:#25D366;
 color:white;
-padding:15px 35px;
-border-radius:6px;
+padding:14px 34px;
+border-radius:8px;
 text-decoration:none;
-font-weight:bold;
-font-size:16px;
-display:inline-flex;
-align-items:center;
-gap:10px;
+font-weight:600;
+transition:.25s
 }
 
-.btn img{
-height:22px;
-}
+.btn:hover{transform:scale(1.06)}
 
-section{
-max-width:1200px;
-margin:auto;
-padding:70px 20px;
-}
+section{max-width:1300px;margin:auto;padding:90px 25px}
+.section-title{text-align:center;font-size:40px;margin-bottom:70px;font-weight:600}
 
-.section-title{
-text-align:center;
-margin-bottom:50px;
-font-size:30px;
-}
-
-.services{
+/* CONTADOR EXPERIENCIA */
+.stats{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:40px;
+text-align:center
 }
+
+.stat{
+background:#111;
+padding:40px;
+border-radius:12px;
+border:1px solid #1f1f1f
+}
+
+.stat h3{
+font-size:50px;
+margin:0;
+color:#25D366
+}
+
+.stat p{color:#bbb;margin-top:10px}
+
+/* SERVICES */
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
 
 .card{
-background:white;
-padding:30px;
-border-radius:10px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-transition:0.3s;
+background:#111;
+padding:32px;
+border-radius:12px;
+border:1px solid #1f1f1f;
+transition:.35s
 }
 
 .card:hover{
-transform:translateY(-6px);
+transform:translateY(-8px);
+border-color:#25D366
 }
 
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:15px;
-}
+.card h3{margin-top:0;color:white}
+.card p{color:#b5b5b5}
 
-.gallery img{
-width:100%;
-height:230px;
-object-fit:cover;
-border-radius:8px;
-}
+/* GALERIA */
+.gallery{column-count:3;column-gap:18px}
+.gallery img{width:100%;margin-bottom:18px;border-radius:12px;transition:.35s}
+.gallery img:hover{transform:scale(1.03)}
 
-.contact{
-background:#0f172a;
-color:white;
+@media(max-width:900px){.gallery{column-count:2}}
+@media(max-width:600px){.gallery{column-count:1}}
+
+/* ANTIRUIDO */
+.big-section{
+background:#050505;
 text-align:center;
-padding:80px 20px;
+border-top:1px solid #1f1f1f;
+border-bottom:1px solid #1f1f1f
 }
 
-footer{
-background:#020617;
-color:#aaa;
-text-align:center;
-padding:25px;
-font-size:14px;
-}
+.big-section h2{font-size:48px;margin-bottom:15px}
+.big-section p{max-width:800px;margin:auto;color:#bdbdbd;margin-bottom:35px}
 
-/* BOTON WHATSAPP */
+.big-image{width:100%;max-width:1000px;border-radius:14px;margin-top:30px}
 
+/* MAP */
+.map-container{margin-top:50px;border-radius:14px;overflow:hidden;border:1px solid #1f1f1f}
+
+/* WHATSAPP */
 .whatsapp-float{
 position:fixed;
 bottom:25px;
@@ -155,33 +180,20 @@ border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-box-shadow:0 10px 25px rgba(0,0,0,0.3);
-z-index:999;
+box-shadow:0 10px 25px rgba(0,0,0,.5);
+z-index:99
 }
 
-.whatsapp-float img{
-width:34px;
-}
+.whatsapp-float img{width:34px}
 
-/* BOTON TIKTOK */
-
-.tiktok-float{
-position:fixed;
-bottom:100px;
-right:25px;
+/* FOOTER */
+footer{
 background:#000;
-width:65px;
-height:65px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-box-shadow:0 10px 25px rgba(0,0,0,0.3);
-z-index:999;
-}
-
-.tiktok-float img{
-width:32px;
+border-top:1px solid #1f1f1f;
+color:#8c8c8c;
+text-align:center;
+padding:35px;
+font-size:14px
 }
 
 </style>
@@ -189,113 +201,119 @@ width:32px;
 
 <body>
 
-<header>
+<div id="progressBar"></div>
+
+<header id="mainHeader">
 <nav>
 
-<div class="logo">
-<img src="logo.png" alt="Triasix Capital Group">
+<a href="#" class="logo">
+<img src="logo.png">
 <strong>Triasix Capital Group</strong>
-</div>
+</a>
 
 <div>
 <a href="#servicios">Servicios</a>
-<a href="#trabajos">Proyectos</a>
-<a href="#contacto">Contacto</a>
+<a href="#experiencia">Experiencia</a>
+<a href="#antiruido">Antiruido</a>
+<a href="#galeria">Proyectos</a>
+<a href="#mapa">Ubicación</a>
 </div>
 
 </nav>
 </header>
 
 <section class="hero">
-<h1>Profesionales en Ventanería</h1>
-<p>Fabricación, instalación y mantenimiento profesional en Bogotá.</p>
+<h1>Especialistas en Ventanas de Aluminio</h1>
+<p>Fabricación e instalación profesional en Bogotá</p>
+<a class="btn" href="https://wa.me/573053399795">Cotizar por WhatsApp</a>
+</section>
 
-<a class="btn" href="https://wa.me/573053399795" target="_blank">
-<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
-Cotizar por WhatsApp
-</a>
+<section id="experiencia">
+<h2 class="section-title">Más de 12 años de experiencia</h2>
 
+<div class="stats">
+
+<div class="stat">
+<h3 class="counter" data-target="12">0</h3>
+<p>Años de Experiencia</p>
+</div>
+
+<div class="stat">
+<h3 class="counter" data-target="500">0</h3>
+<p>Proyectos Realizados</p>
+</div>
+
+<div class="stat">
+<h3 class="counter" data-target="100">0</h3>
+<p>Clientes Satisfechos</p>
+</div>
+
+<div class="stat">
+<h3 class="counter" data-target="24">0</h3>
+<p>Soporte y Atención</p>
+</div>
+
+</div>
 </section>
 
 <section id="servicios">
-<h2 class="section-title">Servicios Profesionales</h2>
+<h2 class="section-title">Nuestros Servicios</h2>
 
 <div class="services">
 
-  </div>
-</section>
-  <section id="empresa">
-
-<h2 class="section-title">Sobre Triasix Capital Group</h2>
-
-<div style="max-width:900px;margin:auto;text-align:center;font-size:18px;line-height:1.7;">
-
-<p>
-En <strong>Triasix Capital Group</strong> contamos con más de 
-<strong>12 años de experiencia</strong> en el sector de la ventanería en aluminio y vidrio en Bogotá.
-Nos especializamos en el diseño, fabricación e instalación de soluciones modernas
-para proyectos residenciales, comerciales y arquitectónicos.
-</p>
-
-<p>
-Nuestro equipo trabaja con materiales de alta calidad y sistemas innovadores
-para ofrecer ventanas, cerramientos y estructuras de vidrio que combinan
-<strong>seguridad, diseño y durabilidad</strong>.
-Cada proyecto es realizado con precisión técnica y acabados profesionales.
-</p>
-
-<p>
-Durante estos años hemos desarrollado proyectos en apartamentos, casas,
-edificios, oficinas y locales comerciales, consolidándonos como una empresa
-confiable en la instalación de
-<strong>ventanas en aluminio, divisiones de baño, puertas corredizas,
-fachadas flotantes, barandas y sistemas antiruido</strong>.
-</p>
-
-<p>
-Nuestro objetivo es brindar soluciones que mejoren los espacios de nuestros
-clientes con productos modernos, funcionales y de larga duración.
-</p>
-
-</div>
-
-</section>
-
 <div class="card">
-<h3>Ventanas en Aluminio</h3>
-<p>Diseño, fabricación e instalación de ventanería moderna en aluminio.</p>
+<h3>Ventanas Proyectantes</h3>
+<p>Sistemas modernos con excelente ventilación.</p>
 </div>
 
 <div class="card">
-<h3>Ventanas Antiruido</h3>
-<p>Sistemas termoacústicos para reducir el ruido exterior.</p>
-</div>
-
-<div class="card">
-<h3>Puertas Corredizas</h3>
-<p>Puertas en aluminio y vidrio templado para casas y oficinas.</p>
+<h3>Ventanas Corredizas</h3>
+<p>Ventanas en aluminio ideales para apartamentos.</p>
 </div>
 
 <div class="card">
 <h3>Divisiones de Baño</h3>
-<p>Vidrio templado de alta calidad con herrajes inoxidables.</p>
+<p>Vidrio templado de alta resistencia.</p>
 </div>
 
 <div class="card">
-<h3>Cerramientos en Vidrio</h3>
-<p>Cerramientos para balcones, terrazas y oficinas.</p>
+<h3>Barandas</h3>
+<p>Barandas en vidrio templado para balcones.</p>
 </div>
 
 <div class="card">
-<h3>Mantenimiento</h3>
-<p>Reparación y mantenimiento de ventanería existente.</p>
+<h3>Corta Vientos</h3>
+<p>Sistemas de vidrio para terrazas y restaurantes.</p>
+</div>
+
+<div class="card">
+<h3>Fachadas Flotantes</h3>
+<p>Fachadas modernas en vidrio y aluminio.</p>
+</div>
+
+<div class="card">
+<h3>Puertas en Aluminio</h3>
+<p>Puertas corredizas y batientes con vidrio.</p>
+</div>
+
+<div class="card">
+<h3>Ventanas Línea Europea</h3>
+<p>Sistema premium con alto aislamiento.</p>
 </div>
 
 </div>
 </section>
 
-<section id="trabajos">
-<h2 class="section-title">Proyectos Realizados</h2>
+<section class="big-section" id="antiruido">
+<h2>Ventanas Antiruido</h2>
+<p>Sistemas termoacústicos diseñados para reducir significativamente el ruido exterior.</p>
+<a class="btn" href="https://wa.me/573053399795">Cotizar Ventanas Antiruido</a>
+
+<img src="antiruido1.jpg" class="big-image">
+</section>
+
+<section id="galeria">
+<h2 class="section-title">Galería de Proyectos</h2>
 
 <div class="gallery">
 <img src="proyecto1.jpg">
@@ -313,28 +331,16 @@ clientes con productos modernos, funcionales y de larga duración.
 <section id="mapa">
 <h2 class="section-title">Ubicación en Bogotá</h2>
 
-<div style="max-width:1000px;margin:auto;border-radius:10px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.2);">
-
-<iframe 
+<div class="map-container">
+<iframe
 src="https://maps.google.com/maps?q=Bogota&t=&z=13&ie=UTF8&iwloc=&output=embed"
-width="100%" 
-height="400" 
-style="border:0;">
+width="100%"
+height="450"
+style="border:0"
+allowfullscreen=""
+loading="lazy">
 </iframe>
-
 </div>
-</section>
-
-<section class="contact" id="contacto">
-<h2>Solicita tu Cotización</h2>
-<p>Atendemos proyectos residenciales y comerciales en Bogotá.</p>
-
-<br>
-
-<a class="btn" href="https://wa.me/573053399795" target="_blank">
-<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
-Hablar por WhatsApp
-</a>
 
 </section>
 
@@ -342,17 +348,41 @@ Hablar por WhatsApp
 © 2026 Triasix Capital Group | Ventanas en Aluminio y Vidrio | Bogotá
 </footer>
 
-<!-- BOTON TIKTOK -->
-
-<a class="tiktok-float" href="https://www.tiktok.com/@triaxiscapitalgroup?_r=1&_t=ZS-94iKTl3Vzpk" target="_blank">
-<img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png">
-</a>
-
-<!-- BOTON WHATSAPP -->
-
-<a class="whatsapp-float" href="https://wa.me/573053399795" target="_blank">
+<a class="whatsapp-float" href="https://wa.me/573053399795">
 <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
 </a>
 
+<script>
+
+/* BARRA PROGRESO */
+window.onscroll=function(){
+let winScroll=document.body.scrollTop||document.documentElement.scrollTop;
+let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+let scrolled=(winScroll/height)*100;
+document.getElementById("progressBar").style.width=scrolled+"%";
+}
+
+/* HEADER COLOR */
+const header=document.getElementById('mainHeader');
+window.addEventListener('scroll',()=>{
+if(window.scrollY>60){header.classList.add('scrolled')}else{header.classList.remove('scrolled')}
+});
+
+/* CONTADOR */
+const counters=document.querySelectorAll('.counter');
+
+counters.forEach(counter=>{
+const update=()=>{
+counter.innerText++;
+if(counter.innerText<counter.dataset.target){
+setTimeout(update,20);
+}
+}
+update();
+});
+
+</script>
+
 </body>
 </html>
+
