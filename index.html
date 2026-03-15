@@ -1,84 +1,273 @@
+
 <!DOCTYPE html>
-<p>Cerramientos para balcones, terrazas, oficinas y locales comerciales.</p>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triasix Capital Group | Ventanas en Aluminio y Vidrio</title>
+
+<style>
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+margin:0;
+background:#f5f7fb;
+color:#222;
+}
+
+header{
+background:#0f172a;
+color:white;
+padding:15px 20px;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+max-width:1200px;
+margin:auto;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo img{
+height:45px;
+}
+
+nav a{
+color:white;
+margin-left:25px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.hero{
+background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),url("https://images.unsplash.com/photo-1503387762-592deb58ef4e");
+background-size:cover;
+background-position:center;
+color:white;
+padding:140px 20px;
+text-align:center;
+}
+
+.hero h1{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:20px;
+margin-bottom:30px;
+}
+
+.btn{
+background:#25D366;
+color:white;
+padding:15px 35px;
+border-radius:6px;
+text-decoration:none;
+font-weight:bold;
+font-size:16px;
+display:inline-flex;
+align-items:center;
+gap:10px;
+}
+
+.btn img{
+height:22px;
+}
+
+section{
+max-width:1200px;
+margin:auto;
+padding:70px 20px;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:50px;
+font-size:30px;
+}
+
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+}
+
+.gallery img{
+width:100%;
+height:230px;
+object-fit:cover;
+border-radius:8px;
+}
+
+.contact{
+background:#0f172a;
+color:white;
+text-align:center;
+padding:80px 20px;
+}
+
+footer{
+background:#020617;
+color:#aaa;
+text-align:center;
+padding:25px;
+font-size:14px;
+}
+
+.whatsapp-float{
+position:fixed;
+bottom:25px;
+right:25px;
+background:#25D366;
+width:65px;
+height:65px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+.whatsapp-float img{
+width:34px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+
+<div class="logo">
+<img src="logo.png" alt="Triasix Capital Group">
+<strong>Triasix Capital Group</strong>
+</div>
+
+<div>
+<a href="#servicios">Servicios</a>
+<a href="#trabajos">Proyectos</a>
+<a href="#contacto">Contacto</a>
+</div>
+
+</nav>
+</header>
+
+<section class="hero">
+<h1>Especialistas en Ventanas de Aluminio</h1>
+<p>Fabricación, instalación y mantenimiento profesional en Bogotá.</p>
+
+<a class="btn" href="https://wa.me/573053399795" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+Cotizar por WhatsApp
+</a>
+
+</section>
+
+<section id="servicios">
+<h2 class="section-title">Servicios Profesionales</h2>
+
+<div class="services">
+
+<div class="card">
+<h3>Ventanas en Aluminio</h3>
+<p>Diseño, fabricación e instalación de ventanería moderna en aluminio.</p>
+</div>
+
+<div class="card">
+<h3>Ventanas Antiruido</h3>
+<p>Sistemas termoacústicos para reducir el ruido exterior.</p>
+</div>
+
+<div class="card">
+<h3>Puertas Corredizas</h3>
+<p>Puertas en aluminio y vidrio templado para casas y oficinas.</p>
 </div>
 
 <div class="card">
 <h3>Divisiones de Baño</h3>
-<p>Divisiones modernas en vidrio templado para baños.</p>
+<p>Vidrio templado de alta calidad con herrajes inoxidables.</p>
+</div>
+
+<div class="card">
+<h3>Cerramientos en Vidrio</h3>
+<p>Cerramientos para balcones, terrazas y oficinas.</p>
 </div>
 
 <div class="card">
 <h3>Mantenimiento</h3>
-<p>Reparación, ajuste y mantenimiento de ventanería existente.</p>
+<p>Reparación y mantenimiento de ventanería existente.</p>
 </div>
 
 </div>
-
 </section>
 
-<section class="section" id="trabajos">
-
-<div class="section-title">
-<h2>Trabajos Realizados</h2>
-</div>
+<section id="trabajos">
+<h2 class="section-title">Proyectos Realizados</h2>
 
 <div class="gallery">
-
-<!-- Reemplaza estas imágenes por fotos reales de tus trabajos -->
-<img src="trabajo1.jpg" alt="Ventana en aluminio instalada por Triasix Capital Group">
-<img src="trabajo2.jpg" alt="Puerta corrediza en aluminio y vidrio">
-<img src="trabajo3.jpg" alt="Ventana termoacústica antiruido">
-<img src="trabajo4.jpg" alt="Cerramiento en vidrio para balcón">
-
-</div>
-
-<p style="text-align:center;margin-top:25px;opacity:0.8">
-Aquí puedes mostrar fotos reales de tus instalaciones: ventanas en aluminio, puertas corredizas, divisiones de baño, cerramientos de balcón y proyectos terminados en Bogotá.
-</p>
-
-</section>
-
-<section class="section" id="clientes">
-
-<div class="section-title">
-<h2>Opiniones de Clientes</h2>
-</div>
-
-<div class="testimonials">
-
-<div class="testimonial">"Excelente trabajo, muy cumplidos y las ventanas quedaron perfectas." ⭐⭐⭐⭐⭐</div>
-<div class="testimonial">"Las ventanas antiruido funcionan muy bien, se redujo mucho el ruido." ⭐⭐⭐⭐⭐</div>
-
+<img src="proyecto1.jpg">
+<img src="proyecto2.jpg">
+<img src="proyecto3.jpg">
+<img src="proyecto4.jpg">
+<img src="proyecto5.jpg">
+<img src="proyecto6.jpg">
+<img src="proyecto7.jpg">
+<img src="proyecto8.jpg">
 </div>
 
 </section>
 
-<section class="section" id="contacto">
+<section class="contact" id="contacto">
+<h2>Solicita tu Cotización</h2>
+<p>Atendemos proyectos residenciales y comerciales en Bogotá.</p>
 
-<div class="section-title">
-<h2>Solicitar Cotización</h2>
-</div>
+<br>
 
-<form class="form">
-<p style="text-align:center;margin-bottom:10px;opacity:0.9">WhatsApp: 305 339 9795 — Bogotá</p>
-<input type="text" placeholder="Nombre">
-<input type="tel" placeholder="Teléfono">
-<input type="email" placeholder="Correo">
-<textarea rows="4" placeholder="Describe tu proyecto"></textarea>
-<button>Enviar solicitud</button>
-</form>
-
-<div class="map">
-<iframe src="https://maps.google.com/maps?q=bogota&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="300" style="border:0"></iframe>
-</div>
+<a class="btn" href="https://wa.me/573053399795" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+Hablar por WhatsApp
+</a>
 
 </section>
-
-<a class="whatsapp-float" href="https://wa.me/573053399795" target="_blank">WhatsApp</a>
 
 <footer>
 © 2026 Triasix Capital Group | Ventanas en Aluminio y Vidrio | Bogotá
 </footer>
+
+<a class="whatsapp-float" href="https://wa.me/573053399795" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+</a>
 
 </body>
 </html>
