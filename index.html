@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,134 +6,193 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Triasix Capital Group | Ventanas en Aluminio y Vidrio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box}
-body{font-family:'Poppins',sans-serif;margin:0;background:#0b0b0b;color:#e5e5e5}
+html{scroll-behavior:smooth}
 
-/* BARRA DE PROGRESO */
+body{
+font-family:'Poppins',sans-serif;
+margin:0;
+background:#050505;
+color:#eaeaea
+}
+
+/* BARRA PROGRESO */
 #progressBar{
 position:fixed;
 top:0;
 left:0;
 height:4px;
-background:#25D366;
+background:linear-gradient(90deg,#25D366,#00ffa6);
 width:0%;
 z-index:9999
 }
 
-/* HEADER */
+/* HEADER PREMIUM */
 header{
-background:transparent;
-border-bottom:1px solid transparent;
-padding:15px 30px;
-position:sticky;
+position:fixed;
+width:100%;
 top:0;
-z-index:10;
+left:0;
+padding:18px 40px;
+background:rgba(0,0,0,.35);
+backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,255,255,.06);
+z-index:1000;
 transition:.35s
 }
 
 header.scrolled{
 background:#000;
-border-bottom:1px solid #1f1f1f;
-box-shadow:0 5px 20px rgba(0,0,0,.6)
+box-shadow:0 10px 30px rgba(0,0,0,.7)
 }
 
-nav{display:flex;justify-content:space-between;align-items:center;max-width:1300px;margin:auto}
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+max-width:1400px;
+margin:auto
+}
 
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:white}
-.logo img{height:64px;object-fit:contain}
+.logo{
+display:flex;
+align-items:center;
+gap:14px;
+text-decoration:none;
+color:white
+}
 
-/* LOGO PREMIUM */
+.logo img{
+height:70px;
+object-fit:contain
+}
+
 .logo strong{
-font-size:20px;
-letter-spacing:1.5px;
+font-size:22px;
+letter-spacing:2px;
 font-weight:600
 }
 
-nav a{color:#ccc;margin-left:28px;text-decoration:none;font-weight:500;transition:.3s}
-nav a:hover{color:white}
+nav a{
+color:#cfcfcf;
+margin-left:30px;
+text-decoration:none;
+font-weight:500;
+transition:.3s
+}
 
-/* HERO */
+nav a:hover{
+color:white
+}
+
+/* HERO ULTRA PREMIUM */
 .hero{
-background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),url("portada.jpg");
+background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.75)),url("portada.jpg");
 background-size:cover;
-background-position:center center;
-background-repeat:no-repeat;
-min-height:100vh;
-width:100%;
+background-position:center;
+height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding:40px 20px
+padding:40px
 }
 
 .hero h1{
-font-size:clamp(34px,6vw,64px);
-margin-bottom:15px;
+font-size:clamp(38px,6vw,80px);
 font-weight:700;
+margin-bottom:20px;
 letter-spacing:1px
 }
 
 .hero p{
-font-size:clamp(16px,2.2vw,22px);
-max-width:700px;
+font-size:clamp(18px,2vw,24px);
 color:#d0d0d0;
-margin-bottom:35px
+max-width:700px;
+margin-bottom:40px
 }
-
-.hero h1{font-size:56px;margin-bottom:10px;font-weight:700}
-.hero p{font-size:20px;color:#d0d0d0;margin-bottom:35px}
 
 .btn{
 background:#25D366;
+padding:16px 38px;
+border-radius:10px;
 color:white;
-padding:14px 34px;
-border-radius:8px;
 text-decoration:none;
 font-weight:600;
-transition:.25s
+font-size:16px;
+transition:.3s
 }
 
-.btn:hover{transform:scale(1.06)}
+.btn:hover{
+transform:translateY(-3px) scale(1.05);
+box-shadow:0 10px 30px rgba(0,0,0,.6)
+}
 
-section{max-width:1300px;margin:auto;padding:90px 25px}
-.section-title{text-align:center;font-size:40px;margin-bottom:70px;font-weight:600}
+/* SECTIONS */
+section{
+max-width:1400px;
+margin:auto;
+padding:110px 30px
+}
 
-/* CONTADOR EXPERIENCIA */
+.section-title{
+text-align:center;
+font-size:46px;
+margin-bottom:70px;
+font-weight:600
+}
+
+/* EXPERIENCIA */
 .stats{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:40px;
-text-align:center
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:40px
 }
 
 .stat{
-background:#111;
-padding:40px;
-border-radius:12px;
-border:1px solid #1f1f1f
+background:#0e0e0e;
+padding:50px 40px;
+border-radius:14px;
+text-align:center;
+border:1px solid rgba(255,255,255,.05);
+transition:.3s
+}
+
+.stat:hover{
+transform:translateY(-6px);
+border-color:#25D366
 }
 
 .stat h3{
-font-size:50px;
+font-size:60px;
 margin:0;
 color:#25D366
 }
 
-.stat p{color:#bbb;margin-top:10px}
+.stat p{color:#bdbdbd;margin-top:10px}
 
-/* SERVICES */
-.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
+/* SERVICIOS */
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px
+}
 
 .card{
-background:#111;
-padding:32px;
-border-radius:12px;
-border:1px solid #1f1f1f;
+position:relative;
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+overflow:hidden;
+
+background:#0f0f0f;
+padding:40px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,.05);
 transition:.35s
 }
 
@@ -141,32 +201,65 @@ transform:translateY(-8px);
 border-color:#25D366
 }
 
-.card h3{margin-top:0;color:white}
-.card p{color:#b5b5b5}
+.card::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.85));
+z-index:0
+}
 
-/* GALERIA */
-.gallery{column-count:3;column-gap:18px}
-.gallery img{width:100%;margin-bottom:18px;border-radius:12px;transition:.35s}
-.gallery img:hover{transform:scale(1.03)}
+.card *{position:relative;z-index:1}
+
+.card h3{margin-top:0;color:white;font-size:22px}
+.card p{color:#a5a5a5}
+
+/* ANTIRUIDO */
+.big-section{
+background:#0a0a0a;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.05);
+border-bottom:1px solid rgba(255,255,255,.05)
+}
+
+.big-section h2{font-size:52px;margin-bottom:15px}
+.big-section p{max-width:800px;margin:auto;color:#bdbdbd;margin-bottom:40px}
+
+.big-image{
+width:100%;
+max-width:1100px;
+border-radius:18px;
+margin-top:30px
+}
+
+/* GALERIA ARQUITECTURA */
+.gallery{
+column-count:3;
+column-gap:22px
+}
+
+.gallery img{
+width:100%;
+margin-bottom:22px;
+border-radius:14px;
+transition:.35s;
+cursor:pointer
+}
+
+.gallery img:hover{
+transform:scale(1.04)
+}
 
 @media(max-width:900px){.gallery{column-count:2}}
 @media(max-width:600px){.gallery{column-count:1}}
 
-/* ANTIRUIDO */
-.big-section{
-background:#050505;
-text-align:center;
-border-top:1px solid #1f1f1f;
-border-bottom:1px solid #1f1f1f
-}
-
-.big-section h2{font-size:48px;margin-bottom:15px}
-.big-section p{max-width:800px;margin:auto;color:#bdbdbd;margin-bottom:35px}
-
-.big-image{width:100%;max-width:1000px;border-radius:14px;margin-top:30px}
-
 /* MAP */
-.map-container{margin-top:50px;border-radius:14px;overflow:hidden;border:1px solid #1f1f1f}
+.map-container{
+margin-top:50px;
+border-radius:16px;
+overflow:hidden;
+border:1px solid rgba(255,255,255,.05)
+}
 
 /* WHATSAPP */
 .whatsapp-float{
@@ -174,13 +267,13 @@ position:fixed;
 bottom:25px;
 right:25px;
 background:#25D366;
-width:65px;
-height:65px;
+width:68px;
+height:68px;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-box-shadow:0 10px 25px rgba(0,0,0,.5);
+box-shadow:0 12px 30px rgba(0,0,0,.6);
 z-index:99
 }
 
@@ -189,10 +282,10 @@ z-index:99
 /* FOOTER */
 footer{
 background:#000;
-border-top:1px solid #1f1f1f;
+border-top:1px solid rgba(255,255,255,.05);
 color:#8c8c8c;
 text-align:center;
-padding:35px;
+padding:45px;
 font-size:14px
 }
 
@@ -208,7 +301,7 @@ font-size:14px
 
 <a href="#" class="logo">
 <img src="logo.png">
-<strong>Triasix Capital Group</strong>
+<strong>TRIASIX CAPITAL GROUP</strong>
 </a>
 
 <div>
@@ -223,13 +316,13 @@ font-size:14px
 </header>
 
 <section class="hero">
-<h1>Especialistas en Ventanas de Aluminio</h1>
-<p>Fabricación e instalación profesional en Bogotá</p>
-<a class="btn" href="https://wa.me/573053399795">Cotizar por WhatsApp</a>
+<h1>Arquitectura en Aluminio y Vidrio</h1>
+<p>Diseño, fabricación e instalación de sistemas de ventanería premium en Bogotá</p>
+<a class="btn" href="https://wa.me/573053399795">Cotizar Proyecto</a>
 </section>
 
 <section id="experiencia">
-<h2 class="section-title">Más de 12 años de experiencia</h2>
+<h2 class="section-title">Más de 12 años construyendo proyectos</h2>
 
 <div class="stats">
 
@@ -263,12 +356,12 @@ font-size:14px
 
 <div class="card">
 <h3>Ventanas Proyectantes</h3>
-<p>Sistemas modernos con excelente ventilación.</p>
+<p>Sistemas modernos de ventilación arquitectónica.</p>
 </div>
 
 <div class="card">
 <h3>Ventanas Corredizas</h3>
-<p>Ventanas en aluminio ideales para apartamentos.</p>
+<p>Diseños minimalistas ideales para apartamentos.</p>
 </div>
 
 <div class="card">
@@ -278,27 +371,27 @@ font-size:14px
 
 <div class="card">
 <h3>Barandas</h3>
-<p>Barandas en vidrio templado para balcones.</p>
+<p>Barandas modernas en vidrio para balcones.</p>
 </div>
 
 <div class="card">
 <h3>Corta Vientos</h3>
-<p>Sistemas de vidrio para terrazas y restaurantes.</p>
+<p>Sistemas de vidrio para terrazas.</p>
 </div>
 
 <div class="card">
 <h3>Fachadas Flotantes</h3>
-<p>Fachadas modernas en vidrio y aluminio.</p>
+<p>Fachadas arquitectónicas en vidrio.</p>
 </div>
 
 <div class="card">
 <h3>Puertas en Aluminio</h3>
-<p>Puertas corredizas y batientes con vidrio.</p>
+<p>Puertas corredizas y batientes.</p>
 </div>
 
 <div class="card">
 <h3>Ventanas Línea Europea</h3>
-<p>Sistema premium con alto aislamiento.</p>
+<p>Sistema premium con aislamiento superior.</p>
 </div>
 
 </div>
@@ -306,7 +399,7 @@ font-size:14px
 
 <section class="big-section" id="antiruido">
 <h2>Ventanas Antiruido</h2>
-<p>Sistemas termoacústicos diseñados para reducir significativamente el ruido exterior.</p>
+<p>Sistemas termoacústicos diseñados para reducir el ruido exterior y mejorar el confort en apartamentos y oficinas.</p>
 <a class="btn" href="https://wa.me/573053399795">Cotizar Ventanas Antiruido</a>
 
 <img src="antiruido1.jpg" class="big-image">
@@ -362,7 +455,7 @@ let scrolled=(winScroll/height)*100;
 document.getElementById("progressBar").style.width=scrolled+"%";
 }
 
-/* HEADER COLOR */
+/* HEADER SCROLL */
 const header=document.getElementById('mainHeader');
 window.addEventListener('scroll',()=>{
 if(window.scrollY>60){header.classList.add('scrolled')}else{header.classList.remove('scrolled')}
@@ -385,4 +478,3 @@ update();
 
 </body>
 </html>
-
