@@ -182,10 +182,6 @@ border-radius:14px;
 border:1px solid rgba(255,255,255,.05)
 }
 
-.card h3{
-color:white
-}
-
 /* GALERIA */
 
 .gallery{
@@ -218,7 +214,7 @@ border:1px solid rgba(255,255,255,.1);
 margin-bottom:40px
 }
 
-/* AJUSTE PARA CELULAR */
+/* CATALOGO MOVIL */
 
 @media(max-width:768px){
 
@@ -347,8 +343,13 @@ color:#8c8c8c
 </div>
 
 <div class="card">
-<h3>Barandas en Vidrio</h3>
-<p>Barandas modernas para balcones.</p>
+<h3>Barandas</h3>
+<p>Barandas modernas en vidrio para balcones.</p>
+</div>
+
+<div class="card">
+<h3>Corta Vientos</h3>
+<p>Sistemas de vidrio para terrazas.</p>
 </div>
 
 <div class="card">
@@ -359,6 +360,11 @@ color:#8c8c8c
 <div class="card">
 <h3>Puertas en Aluminio</h3>
 <p>Puertas corredizas y batientes.</p>
+</div>
+
+<div class="card">
+<h3>Ventanas Línea Europea</h3>
+<p>Sistema premium con aislamiento superior.</p>
 </div>
 
 </div>
@@ -385,6 +391,7 @@ color:#8c8c8c
 
 </section>
 
+<!-- GALERIA -->
 <section id="galeria">
 
 <h2 class="section-title">Galería de Proyectos</h2>
@@ -396,13 +403,17 @@ color:#8c8c8c
 <img src="proyecto4.jpg">
 <img src="proyecto5.jpg">
 <img src="proyecto6.jpg">
+<img src="proyecto7.jpg">
+<img src="proyecto8.jpg">
 </div>
 
 </section>
 
+<!-- MAPA -->
+
 <section id="mapa">
 
-<h2 class="section-title">Ubicación</h2>
+<h2 class="section-title">Ubicación en Bogotá</h2>
 
 <div class="map-container">
 
@@ -417,8 +428,10 @@ style="border:0">
 
 </section>
 
+<!-- FORMULARIO Y RESEÑAS siguen igual que tu versión -->
+
 <footer>
-© 2026 Triasix Capital Group | Ventanas en Aluminio y Vidrio
+© 2026 Triasix Capital Group | Ventanas en Aluminio y Vidrio | Bogotá
 </footer>
 
 <a class="whatsapp-float" href="https://wa.me/573053399795">
@@ -440,6 +453,24 @@ let scrolled=(winScroll/height)*100;
 document.getElementById("progressBar").style.width=scrolled+"%";
 
 }
+
+/* HEADER */
+
+const header=document.getElementById('mainHeader');
+
+window.addEventListener('scroll',()=>{
+
+if(window.scrollY>60){
+
+header.classList.add('scrolled')
+
+}else{
+
+header.classList.remove('scrolled')
+
+}
+
+});
 
 /* CONTADOR */
 
