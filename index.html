@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 
@@ -29,7 +30,7 @@ width:0%;
 z-index:9999
 }
 
-/* HEADER PREMIUM */
+/* HEADER */
 header{
 position:fixed;
 width:100%;
@@ -65,14 +66,12 @@ color:white
 }
 
 .logo img{
-height:70px;
-object-fit:contain
+height:70px
 }
 
 .logo strong{
 font-size:22px;
-letter-spacing:2px;
-font-weight:600
+letter-spacing:2px
 }
 
 nav a{
@@ -80,14 +79,14 @@ color:#cfcfcf;
 margin-left:30px;
 text-decoration:none;
 font-weight:500;
-transition:.3s
 }
 
 nav a:hover{
 color:white
 }
 
-/* HERO ULTRA PREMIUM */
+/* HERO */
+
 .hero{
 background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.75)),url("portada.jpg");
 background-size:cover;
@@ -103,17 +102,17 @@ padding:40px
 
 .hero h1{
 font-size:clamp(38px,6vw,80px);
-font-weight:700;
-margin-bottom:20px;
-letter-spacing:1px
+margin-bottom:20px
 }
 
 .hero p{
-font-size:clamp(18px,2vw,24px);
+font-size:22px;
 color:#d0d0d0;
 max-width:700px;
 margin-bottom:40px
 }
+
+/* BOTONES */
 
 .btn{
 background:#25D366;
@@ -122,51 +121,15 @@ border-radius:10px;
 color:white;
 text-decoration:none;
 font-weight:600;
-font-size:16px;
 transition:.3s
 }
 
-  <section id="catalogo">
-
-<h2 class="section-title">Catálogo de Sistemas</h2>
-
-<div style="max-width:1000px;margin:auto;text-align:center">
-
-<iframe 
-src="catalogo-triasix.pdf"
-width="100%"
-height="700"
-style="border-radius:12px;border:1px solid rgba(255,255,255,.1);margin-bottom:40px;">
-</iframe>
-
-<a class="btn" 
-href="https://wa.me/573053399795?text=Hola%20quiero%20cotizar%20un%20sistema%20del%20catalogo">
-Cotizar este sistema
-</a>
-
-<a class="btn" 
-href="catalogo-triasix.pdf" 
-target="_blank"
-style="margin-left:20px;background:#1e1e1e;border:1px solid rgba(255,255,255,.1)">
-Ver catálogo completo
-</a>
-
-<a class="btn" 
-href="catalogo-triasix.pdf" 
-download
-style="margin-left:20px;background:#007bff">
-Descargar catálogo
-</a>
-
-</div>
-
-</section>
 .btn:hover{
 transform:translateY(-3px) scale(1.05);
-box-shadow:0 10px 30px rgba(0,0,0,.6)
 }
 
-/* SECTIONS */
+/* SECCIONES */
+
 section{
 max-width:1400px;
 margin:auto;
@@ -176,11 +139,11 @@ padding:110px 30px
 .section-title{
 text-align:center;
 font-size:46px;
-margin-bottom:70px;
-font-weight:600
+margin-bottom:70px
 }
 
 /* EXPERIENCIA */
+
 .stats{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
@@ -189,16 +152,9 @@ gap:40px
 
 .stat{
 background:#0e0e0e;
-padding:50px 40px;
+padding:50px;
 border-radius:14px;
-text-align:center;
-border:1px solid rgba(255,255,255,.05);
-transition:.3s
-}
-
-.stat:hover{
-transform:translateY(-6px);
-border-color:#25D366
+text-align:center
 }
 
 .stat h3{
@@ -207,9 +163,8 @@ margin:0;
 color:#25D366
 }
 
-.stat p{color:#bdbdbd;margin-top:10px}
-
 /* SERVICIOS */
+
 .services{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -217,91 +172,18 @@ gap:30px
 }
 
 .card{
-position:relative;
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-overflow:hidden;
-
-  <section id="catalogo">
-
-<h2 class="section-title">Catálogo de Sistemas</h2>
-
-<div style="max-width:1000px;margin:auto;text-align:center">
-
-<iframe 
-src="catalogo-triasix.pdf"
-width="100%"
-height="700"
-style="border-radius:12px;border:1px solid rgba(255,255,255,.1);margin-bottom:40px;">
-</iframe>
-
-<a class="btn" 
-href="https://wa.me/573053399795?text=Hola%20quiero%20cotizar%20un%20sistema%20del%20catalogo">
-Cotizar este sistema
-</a>
-
-<a class="btn" 
-href="catalogo-triasix.pdf" 
-target="_blank"
-style="margin-left:20px;background:#1e1e1e;border:1px solid rgba(255,255,255,.1)">
-Ver catálogo completo
-</a>
-
-<a class="btn" 
-href="catalogo-triasix.pdf" 
-download
-style="margin-left:20px;background:#007bff">
-Descargar catálogo
-</a>
-
-</div>
-
-</section>
 background:#0f0f0f;
 padding:40px;
 border-radius:14px;
-border:1px solid rgba(255,255,255,.05);
-transition:.35s
+border:1px solid rgba(255,255,255,.05)
 }
 
-.card:hover{
-transform:translateY(-8px);
-border-color:#25D366
+.card h3{
+color:white
 }
 
-.card::before{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.85));
-z-index:0
-}
+/* GALERIA */
 
-.card *{position:relative;z-index:1}
-
-.card h3{margin-top:0;color:white;font-size:22px}
-.card p{color:#a5a5a5}
-
-/* ANTIRUIDO */
-.big-section{
-background:#0a0a0a;
-text-align:center;
-border-top:1px solid rgba(255,255,255,.05);
-border-bottom:1px solid rgba(255,255,255,.05)
-}
-
-.big-section h2{font-size:52px;margin-bottom:15px}
-.big-section p{max-width:800px;margin:auto;color:#bdbdbd;margin-bottom:40px}
-
-.big-image{
-width:100%;
-max-width:1100px;
-border-radius:18px;
-margin-top:30px
-}
-
-/* GALERIA ARQUITECTURA */
 .gallery{
 column-count:3;
 column-gap:22px
@@ -310,27 +192,37 @@ column-gap:22px
 .gallery img{
 width:100%;
 margin-bottom:22px;
-border-radius:14px;
-transition:.35s;
-cursor:pointer
-}
-
-.gallery img:hover{
-transform:scale(1.04)
+border-radius:14px
 }
 
 @media(max-width:900px){.gallery{column-count:2}}
 @media(max-width:600px){.gallery{column-count:1}}
 
-/* MAP */
+/* CATALOGO */
+
+.catalogo{
+max-width:1100px;
+margin:auto;
+text-align:center
+}
+
+.catalogo iframe{
+width:100%;
+height:700px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,.1);
+margin-bottom:40px
+}
+
+/* MAPA */
+
 .map-container{
-margin-top:50px;
 border-radius:16px;
-overflow:hidden;
-border:1px solid rgba(255,255,255,.05)
+overflow:hidden
 }
 
 /* WHATSAPP */
+
 .whatsapp-float{
 position:fixed;
 bottom:25px;
@@ -341,30 +233,22 @@ height:68px;
 border-radius:50%;
 display:flex;
 align-items:center;
-justify-content:center;
-box-shadow:0 12px 30px rgba(0,0,0,.6);
-z-index:99
+justify-content:center
 }
 
-.whatsapp-float img{width:34px}
+.whatsapp-float img{
+width:34px
+}
 
 /* FOOTER */
+
 footer{
 background:#000;
-border-top:1px solid rgba(255,255,255,.05);
-color:#8c8c8c;
 text-align:center;
 padding:45px;
-font-size:14px
+color:#8c8c8c
 }
 
-</a>
-
-</div>
-
-</div>
-
-</section>
 </style>
 </head>
 
@@ -383,7 +267,7 @@ font-size:14px
 <div>
 <a href="#servicios">Servicios</a>
 <a href="#experiencia">Experiencia</a>
-<a href="#antiruido">Antiruido</a>
+<a href="#catalogo">Catálogo</a>
 <a href="#galeria">Proyectos</a>
 <a href="#mapa">Ubicación</a>
 </div>
@@ -398,6 +282,7 @@ font-size:14px
 </section>
 
 <section id="experiencia">
+
 <h2 class="section-title">Más de 12 años construyendo proyectos</h2>
 
 <div class="stats">
@@ -423,9 +308,11 @@ font-size:14px
 </div>
 
 </div>
+
 </section>
 
 <section id="servicios">
+
 <h2 class="section-title">Nuestros Servicios</h2>
 
 <div class="services">
@@ -446,13 +333,8 @@ font-size:14px
 </div>
 
 <div class="card">
-<h3>Barandas</h3>
-<p>Barandas modernas en vidrio para balcones.</p>
-</div>
-
-<div class="card">
-<h3>Corta Vientos</h3>
-<p>Sistemas de vidrio para terrazas.</p>
+<h3>Barandas en Vidrio</h3>
+<p>Barandas modernas para balcones.</p>
 </div>
 
 <div class="card">
@@ -465,23 +347,30 @@ font-size:14px
 <p>Puertas corredizas y batientes.</p>
 </div>
 
-<div class="card">
-<h3>Ventanas Línea Europea</h3>
-<p>Sistema premium con aislamiento superior.</p>
 </div>
 
-</div>
 </section>
 
-<section class="big-section" id="antiruido">
-<h2>Ventanas Antiruido</h2>
-<p>Sistemas termoacústicos diseñados para reducir el ruido exterior y mejorar el confort en apartamentos y oficinas.</p>
-<a class="btn" href="https://wa.me/573053399795">Cotizar Ventanas Antiruido</a>
+<section id="catalogo">
 
-<img src="antiruido1.jpg" class="big-image">
+<h2 class="section-title">Catálogo de Sistemas</h2>
+
+<div class="catalogo">
+
+<iframe src="catalogo-triasix.pdf"></iframe>
+
+<a class="btn" href="https://wa.me/573053399795?text=Hola%20quiero%20cotizar%20un%20sistema%20del%20catalogo">Cotizar este sistema</a>
+
+<a class="btn" href="catalogo-triasix.pdf" target="_blank" style="background:#222;margin-left:20px">Ver catálogo</a>
+
+<a class="btn" href="catalogo-triasix.pdf" download style="background:#007bff;margin-left:20px">Descargar catálogo</a>
+
+</div>
+
 </section>
 
 <section id="galeria">
+
 <h2 class="section-title">Galería de Proyectos</h2>
 
 <div class="gallery">
@@ -491,118 +380,29 @@ font-size:14px
 <img src="proyecto4.jpg">
 <img src="proyecto5.jpg">
 <img src="proyecto6.jpg">
-<img src="proyecto7.jpg">
-<img src="proyecto8.jpg">
 </div>
 
 </section>
 
-</a>
-
-</div>
-
-</div>
-
-</section>
-  
 <section id="mapa">
-<h2 class="section-title">Ubicación en Bogotá</h2>
+
+<h2 class="section-title">Ubicación</h2>
 
 <div class="map-container">
+
 <iframe
 src="https://maps.google.com/maps?q=Bogota&t=&z=13&ie=UTF8&iwloc=&output=embed"
 width="100%"
 height="450"
-style="border:0"
-allowfullscreen=""
-loading="lazy">
+style="border:0">
 </iframe>
-</div>
-
-</section>
-
-<section id="contacto">
-
-<h2 class="section-title">Contáctanos</h2>
-
-<div class="contact-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;max-width:1100px;margin:auto;">
-
-<form action="https://formspree.io/f/xaqpdvpb" method="POST" class="contact-form" style="display:flex;flex-direction:column;gap:15px;">
-
-<input type="text" name="nombre" placeholder="Nombre" required style="padding:14px;border-radius:8px;border:1px solid #333;background:#0f0f0f;color:white;">
-
-<input type="email" name="email" placeholder="Email" required style="padding:14px;border-radius:8px;border:1px solid #333;background:#0f0f0f;color:white;">
-
-<input type="tel" name="telefono" placeholder="Teléfono" style="padding:14px;border-radius:8px;border:1px solid #333;background:#0f0f0f;color:white;">
-
-<textarea name="mensaje" placeholder="Cuéntanos tu proyecto" rows="5" style="padding:14px;border-radius:8px;border:1px solid #333;background:#0f0f0f;color:white;"></textarea>
-
-<label style="font-size:14px;color:#bbb;">
-<input type="checkbox" required>
-Acepto políticas de tratamiento de datos
-</label>
-
-<button type="submit" class="btn">Enviar solicitud</button>
-
-<a href="https://wa.me/573053399795" class="btn" style="background:#25D366;text-align:center;">Hablar por WhatsApp</a>
-
-</form>
-
-<div class="contact-info" style="background:#111;padding:40px;border-radius:12px;border:1px solid rgba(255,255,255,.05);">
-
-<h3 style="font-size:28px;margin-top:0;color:white;">Triasix Capital Group</h3>
-
-<p style="color:#bbb;line-height:1.6">
-Especialistas en ventanería en aluminio y vidrio en Bogotá. Diseñamos, fabricamos e instalamos soluciones modernas para proyectos residenciales y comerciales.
-</p>
-
-<p style="color:#bbb"><strong>Teléfono:</strong> 305 339 9795</p>
-<p style="color:#bbb"><strong>Ciudad:</strong> Bogotá, Colombia carrera 6 # 2 a -20 </p>
-<p style="color:#bbb"><strong>Email:</strong> ventas@ventanastriasix.com</p>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="reviews">
-
-<h2 class="section-title">Opiniones de Clientes</h2>
-
-<div style="text-align:center;margin-bottom:50px;">
-<h3 style="font-size:32px;margin:0">BUENO</h3>
-<div style="font-size:26px;color:#ffc107;margin:10px 0">★★★★★</div>
-<p style="color:#aaa">A base de 163 reseñas</p>
-<img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" style="height:30px;margin-top:10px">
-</div>
-
-<div class="reviews-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;max-width:1200px;margin:auto;">
-
-<div class="review-card" style="background:#0f0f0f;padding:25px;border-radius:12px;border:1px solid rgba(255,255,255,.05);">
-<strong>Martin Celis</strong>
-<div style="color:#ffc107;margin:6px 0">★★★★★</div>
-<p style="color:#bbb">Lo mejor cuando de vidrio se habla, excelente atención.</p>
-</div>
-
-<div class="review-card" style="background:#0f0f0f;padding:25px;border-radius:12px;border:1px solid rgba(255,255,255,.05);">
-<strong>Hernando Cardona</strong>
-<div style="color:#ffc107;margin:6px 0">★★★★★</div>
-<p style="color:#bbb">Excelente servicio y calidad en la instalación.</p>
-</div>
-
-<div class="review-card" style="background:#0f0f0f;padding:25px;border-radius:12px;border:1px solid rgba(255,255,255,.05);">
-<strong>Alexander Arroyave</strong>
-<div style="color:#ffc107;margin:6px 0">★★★★★</div>
-<p style="color:#bbb">Muy buen servicio y precio. Recomendados.</p>
-</div>
 
 </div>
 
 </section>
 
 <footer>
-© 2026 Triasix Capital Group | Ventanas en Aluminio y Vidrio | Bogotá
+© 2026 Triasix Capital Group | Ventanas en Aluminio y Vidrio
 </footer>
 
 <a class="whatsapp-float" href="https://wa.me/573053399795">
@@ -612,30 +412,39 @@ Especialistas en ventanería en aluminio y vidrio en Bogotá. Diseñamos, fabric
 <script>
 
 /* BARRA PROGRESO */
+
 window.onscroll=function(){
+
 let winScroll=document.body.scrollTop||document.documentElement.scrollTop;
+
 let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+
 let scrolled=(winScroll/height)*100;
+
 document.getElementById("progressBar").style.width=scrolled+"%";
+
 }
 
-/* HEADER SCROLL */
-const header=document.getElementById('mainHeader');
-window.addEventListener('scroll',()=>{
-if(window.scrollY>60){header.classList.add('scrolled')}else{header.classList.remove('scrolled')}
-});
-
 /* CONTADOR */
+
 const counters=document.querySelectorAll('.counter');
 
 counters.forEach(counter=>{
+
 const update=()=>{
+
 counter.innerText++;
+
 if(counter.innerText<counter.dataset.target){
+
 setTimeout(update,20);
+
 }
+
 }
+
 update();
+
 });
 
 </script>
