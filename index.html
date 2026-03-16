@@ -20,6 +20,7 @@ color:#eaeaea
 }
 
 /* BARRA PROGRESO */
+
 #progressBar{
 position:fixed;
 top:0;
@@ -31,6 +32,7 @@ z-index:9999
 }
 
 /* HEADER */
+
 header{
 position:fixed;
 width:100%;
@@ -121,7 +123,9 @@ border-radius:10px;
 color:white;
 text-decoration:none;
 font-weight:600;
-transition:.3s
+transition:.3s;
+display:inline-block;
+margin-top:10px
 }
 
 .btn:hover{
@@ -212,6 +216,16 @@ height:700px;
 border-radius:12px;
 border:1px solid rgba(255,255,255,.1);
 margin-bottom:40px
+}
+
+/* AJUSTE PARA CELULAR */
+
+@media(max-width:768px){
+
+.catalogo iframe{
+height:450px;
+}
+
 }
 
 /* MAPA */
@@ -359,11 +373,13 @@ color:#8c8c8c
 
 <iframe src="catalogo-triasix.pdf"></iframe>
 
+<p style="color:#bbb">Si el catálogo no se visualiza correctamente en tu celular puedes abrirlo aquí:</p>
+
 <a class="btn" href="https://wa.me/573053399795?text=Hola%20quiero%20cotizar%20un%20sistema%20del%20catalogo">Cotizar este sistema</a>
 
-<a class="btn" href="catalogo-triasix.pdf" target="_blank" style="background:#222;margin-left:20px">Ver catálogo</a>
+<a class="btn" href="catalogo-triasix.pdf" target="_blank" style="background:#222;margin-left:10px">Ver catálogo completo</a>
 
-<a class="btn" href="catalogo-triasix.pdf" download style="background:#007bff;margin-left:20px">Descargar catálogo</a>
+<a class="btn" href="catalogo-triasix.pdf" download style="background:#007bff;margin-left:10px">Descargar catálogo</a>
 
 </div>
 
