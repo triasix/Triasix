@@ -232,13 +232,6 @@ padding:45px;
 color:#8c8c8c
 }
 
-</div>
-
-</section>
-</head>
-
-<body>
-
 <div id="progressBar"></div>
 
 <header id="mainHeader">
@@ -294,7 +287,107 @@ color:#8c8c8c
 <h3 class="counter" data-target="150">0</h3>
 <p>Soporte y Atención</p>
 </div>
+<section id="antiruido" class="antiruido">
 
+  <div class="antiruido-content">
+
+    <!-- TEXTO -->
+    <div class="antiruido-text">
+
+      <h2>Ventanas Acústicas (Antiruido)</h2>
+
+      <p>
+        Soluciones especializadas para reducir el ruido exterior en apartamentos,
+        oficinas y espacios comerciales en Bogotá. Nuestros sistemas termoacústicos
+        combinan vidrios laminados y perfilería de alta calidad para garantizar confort,
+        aislamiento y diseño moderno.
+      </p>
+
+      <ul>
+        <li>✔ Reducción de ruido hasta 80%</li>
+        <li>✔ Vidrio laminado 3+3 / 4+4</li>
+        <li>✔ Sellado hermético profesional</li>
+        <li>✔ Diseño moderno y elegante</li>
+      </ul>
+
+      <a href="https://api.whatsapp.com/send?phone=573053399795" class="btn">
+        Cotizar Ventanas Antiruido
+      </a>
+
+    </div>
+
+    <!-- IMAGEN -->
+    <div class="antiruido-img">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="ventanas acústicas">
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+
+.antiruido {
+  background: #0b0b0b;
+  padding: 80px 20px;
+  color: white;
+}
+
+/* CONTENEDOR */
+.antiruido-content {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+/* TEXTO */
+.antiruido-text h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.antiruido-text p {
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.antiruido-text ul {
+  margin-bottom: 20px;
+}
+
+.antiruido-text li {
+  margin-bottom: 10px;
+}
+
+/* BOTÓN */
+.btn {
+  display: inline-block;
+  padding: 15px 25px;
+  background: #25D366;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+/* IMAGEN */
+.antiruido-img img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* RESPONSIVE */
+@media(max-width: 768px){
+  .antiruido-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+</style>
 </div>
 
 </section>
@@ -347,7 +440,86 @@ style="border-radius:12px;border:none;">
 
 </div>
 
+</div>
 
+</section>
+
+</section>
+
+<section id="galeria">
+
+<h2 class="section-title">Galería de Proyectos</h2>
+
+<div class="gallery">
+
+<img src="proyecto1.jpg" onclick="openLightbox(this)">
+<img src="proyecto2.jpg" onclick="openLightbox(this)">
+<img src="proyecto3.jpg" onclick="openLightbox(this)">
+<img src="proyecto4.jpg" onclick="openLightbox(this)">
+<img src="proyecto5.jpg" onclick="openLightbox(this)">
+<img src="proyecto6.jpg" onclick="openLightbox(this)">
+<img src="proyecto7.jpg" onclick="openLightbox(this)">
+<img src="proyecto8.jpg" onclick="openLightbox(this)">
+
+</div>
+
+</section>
+
+<div id="lightbox">
+
+<span onclick="closeLightbox()">✕</span>
+
+<img id="lightbox-img">
+</div>
+
+</section>
+
+<section id="contacto">
+
+<h2 class="section-title">Contáctanos</h2>
+
+<div class="contact-grid">
+
+<form action="https://formspree.io/f/xaqpdvpb" method="POST" class="contact-form">
+
+<input type="text" name="nombre" placeholder="Nombre" required>
+
+<input type="email" name="email" placeholder="Email" required>
+
+<input type="tel" name="telefono" placeholder="Teléfono">
+
+<textarea name="mensaje" placeholder="Cuéntanos tu proyecto" rows="5"></textarea>
+
+<label style="font-size:14px;color:#bbb;">
+<input type="checkbox" required>
+Acepto políticas de tratamiento de datos
+</label>
+
+<button type="submit" class="btn">Enviar solicitud</button>
+
+<a href="https://wa.me/573053399795" class="btn" style="margin-top:10px">
+Hablar por WhatsApp
+</a>
+
+</form>
+
+<div class="contact-info">
+
+<h3 style="font-size:28px;margin-top:0;color:white;">Triasix Capital Group</h3>
+
+<p style="color:#bbb;line-height:1.6">
+Especialistas en ventanería en aluminio y vidrio en Bogotá. Diseñamos,
+fabricamos e instalamos soluciones modernas para proyectos residenciales
+y comerciales.
+</p>
+
+<p style="color:#bbb"><strong>Teléfono:</strong> 305 339 9795</p>
+
+<p style="color:#bbb"><strong>Dirección:</strong> Bogotá carrera 6 # 2a -20</p>
+
+<p style="color:#bbb"><strong>Email:</strong> ventas@ventanastriasix.com</p>
+
+</div>
 <section class="acustica-section">
 
   <div class="container">
@@ -612,83 +784,6 @@ function calcular(){
 
 </script>
 
-
-<section id="galeria">
-
-<h2 class="section-title">Galería de Proyectos</h2>
-
-<div class="gallery">
-
-<img src="proyecto1.jpg" onclick="openLightbox(this)">
-<img src="proyecto2.jpg" onclick="openLightbox(this)">
-<img src="proyecto3.jpg" onclick="openLightbox(this)">
-<img src="proyecto4.jpg" onclick="openLightbox(this)">
-<img src="proyecto5.jpg" onclick="openLightbox(this)">
-<img src="proyecto6.jpg" onclick="openLightbox(this)">
-<img src="proyecto7.jpg" onclick="openLightbox(this)">
-<img src="proyecto8.jpg" onclick="openLightbox(this)">
-
-</div>
-
-</section>
-
-<div id="lightbox">
-
-<span onclick="closeLightbox()">✕</span>
-
-<img id="lightbox-img">
-</div>
-
-</section>
-
-<section id="contacto">
-
-<h2 class="section-title">Contáctanos</h2>
-
-<div class="contact-grid">
-
-<form action="https://formspree.io/f/xaqpdvpb" method="POST" class="contact-form">
-
-<input type="text" name="nombre" placeholder="Nombre" required>
-
-<input type="email" name="email" placeholder="Email" required>
-
-<input type="tel" name="telefono" placeholder="Teléfono">
-
-<textarea name="mensaje" placeholder="Cuéntanos tu proyecto" rows="5"></textarea>
-
-<label style="font-size:14px;color:#bbb;">
-<input type="checkbox" required>
-Acepto políticas de tratamiento de datos
-</label>
-
-<button type="submit" class="btn">Enviar solicitud</button>
-
-<a href="https://wa.me/573053399795" class="btn" style="margin-top:10px">
-Hablar por WhatsApp
-</a>
-
-</form>
-
-<div class="contact-info">
-
-<h3 style="font-size:28px;margin-top:0;color:white;">Triasix Capital Group</h3>
-
-<p style="color:#bbb;line-height:1.6">
-Especialistas en ventanería en aluminio y vidrio en Bogotá. Diseñamos,
-fabricamos e instalamos soluciones modernas para proyectos residenciales
-y comerciales.
-</p>
-
-<p style="color:#bbb"><strong>Teléfono:</strong> 305 339 9795</p>
-
-<p style="color:#bbb"><strong>Dirección:</strong> Bogotá carrera 6 # 2a -20</p>
-
-<p style="color:#bbb"><strong>Email:</strong> ventas@ventanastriasix.com</p>
-
-</div>
-
-
 </section>
 
 <section class="google-reviews">
@@ -830,6 +925,7 @@ setTimeout(update,20);
 update();
 
 });
+
 
 
 }
