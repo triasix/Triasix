@@ -608,174 +608,68 @@ document.getElementById("resultado").innerHTML =
 
 </div>
 <script>
-```javascript
-let ctx, analyser, data, animacion;
-let historial = [];
+```html id="finalmedidorok"
+<!-- MEDIDOR PRO COMPLETO FUNCIONAL -->
 
-// ACTIVAR AUDIO (CORREGIDO)
-async function activarAudio(){
+<div class="sound-pro">
 
-try{
+<h3>Diagnóstico Acústico Inteligente</h3>
 
-// 🔥 reiniciar si ya existe
-if(ctx){
-cancelAnimationFrame(animacion);
-ctx.close();
+<div class="meter">
+  <div id="barra"></div>
+</div>
+
+<div id="db">0 dB</div>
+<div id="nivel">Nivel: -</div>
+<div id="diagnostico">Diagnóstico: esperando medición</div>
+
+<!-- 🔥 GRAFICA -->
+<canvas id="grafica" height="100"></canvas>
+
+<input type="number" id="ancho" placeholder="Ancho (m)">
+<input type="number" id="alto" placeholder="Alto (m)">
+
+<div id="precio"></div>
+
+<button onclick="activarAudio()">Activar Medición</button>
+<button onclick="modoDemo()">Modo Demo</button>
+
+<a id="wsp" target="_blank">Enviar diagnóstico</a>
+
+</div>
+
+<style>
+
+.sound-pro{
+background:#111;
+padding:25px;
+border-radius:16px;
+text-align:center;
+max-width:600px;
+margin:auto;
+color:#fff;
 }
 
-ctx = new (window.AudioContext || window.webkitAudioContext)();
-
-// 🔥 clave para móviles
-if(ctx.state === "suspended"){
-await ctx.resume();
+.meter{
+height:20px;
+background:#222;
+border-radius:10px;
+margin:10px 0;
+overflow:hidden;
 }
 
-const stream = await navigator.mediaDevices.getUserMedia({
-audio:{
-echoCancellation:true,
-noiseSuppression:true,
-autoGainControl:true
-}
-});
-
-analyser = ctx.createAnalyser();
-const source = ctx.createMediaStreamSource(stream);
-
-source.connect(analyser);
-
-analyser.fftSize = 512;
-data = new Uint8Array(analyser.frequencyBinCount);
-
-medir();
-
-}catch(e){
-alert("Error: activa permisos o usa HTTPS");
-console.error(e);
+#barra{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#00ffcc,#ff0055);
+transition:0.2s;
 }
 
-}
-
-// LOOP ESTABLE
-function medir(){
-
-if(!analyser) return;
-
-analyser.getByteFrequencyData(data);
-
-// cálculo más estable
-let sum = 0;
-for(let i=0;i<data.length;i++){
-sum += data[i];
-}
-
-let db = Math.round(sum / data.length);
-
-procesar(db);
-
-animacion = requestAnimationFrame(medir);
-}
-
-// DEMO SEGURO
-function modoDemo(){
-
-cancelAnimationFrame(animacion);
-
-function sim(){
-let db = Math.floor(Math.random()*90)+10;
-procesar(db);
-animacion = requestAnimationFrame(sim);
-}
-
-sim();
-}
-
-// PROCESO (CORREGIDO)
-function procesar(db){
-
-// 🔥 VARIABLES CORREGIDAS
-document.getElementById("db").innerText = db + " dB";
-document.getElementById("barra").style.width = db + "%";
-
-// CLASIFICACION
-let nivel, sistema, descripcion, precioM2;
-
-if(db < 35){
-nivel="Ambiente silencioso";
-sistema="No requiere intervención";
-descripcion="Condiciones óptimas";
-precioM2=0;
-}
-else if(db < 55){
-nivel="Ruido moderado";
-sistema="Vidrio laminado 3+3";
-descripcion="Mejora recomendada";
-precioM2=220000;
-}
-else if(db < 75){
-nivel="Ruido alto";
-sistema="Vidrio 4+4 hermético";
-descripcion="Afectación significativa";
-precioM2=320000;
-}
-else{
-nivel="Ruido crítico 🚨";
-sistema="Doble cámara acústica";
-descripcion="Intervención obligatoria";
-precioM2=450000;
-}
-
-// 🔥 FIX VARIABLES
-document.getElementById("nivel").innerText = nivel;
-
-document.getElementById("diagnostico").innerHTML =
-"Sistema: " + sistema + "<br>" + descripcion;
-
-// CALCULO
-let a = parseFloat(document.getElementById("ancho").value);
-let b = parseFloat(document.getElementById("alto").value);
-
-let texto = `Diagnóstico acústico:
-${db} dB
-${nivel}
-Sistema: ${sistema}`;
-
-if(a > 0 && b > 0 && precioM2 > 0){
-
-let total = a * b * precioM2;
-
-document.getElementById("precio").innerHTML =
-"Inversión: $" + total.toLocaleString();
-
-texto += `\nMedidas: ${a}x${b}\nPrecio: $${total.toLocaleString()}`;
-}
-
-// WHATSAPP
-document.getElementById("wsp").href =
-"https://wa.me/573000000000?text=" + encodeURIComponent(texto);
-
-// 🔥 GRAFICA (FIX CLAVE)
-let canvas = document.getElementById("grafica");
-if(!canvas) return;
-
-let ctx2 = canvas.getContext("2d");
-
-historial.push(db);
-if(historial.length > 50) historial.shift();
-
-ctx2.clearRect(0,0,canvas.width,canvas.height);
-ctx2.beginPath();
-
-historial.forEach((v,i)=>{
-let x = (i / 50) * canvas.width;
-let y = canvas.height - (v * 1.2);
-ctx2.lineTo(x,y);
-});
-
-ctx2.strokeStyle = "#00c2ff";
-ctx2.lineWidth = 2;
-ctx2.stroke();
-
-}
+input{
+width:100%;
+padding:10px;
+margin:5px 0;
+background:
 ```
 
 }
