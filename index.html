@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Triasix Capital Group</title>
+<title>Triasix Capital Group | Ventanas en Aluminio y Vidrio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -21,7 +21,7 @@ background:#050505;
 color:#eaeaea
 }
 
-/* BARRA */
+/* BARRA PROGRESO */
 #progressBar{
 position:fixed;
 top:0;
@@ -41,12 +41,14 @@ left:0;
 padding:18px 40px;
 background:rgba(0,0,0,.35);
 backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,255,255,.06);
 z-index:1000;
-transition:.3s
+transition:.35s
 }
 
 header.scrolled{
 background:#000;
+box-shadow:0 10px 30px rgba(0,0,0,.7)
 }
 
 nav{
@@ -60,65 +62,131 @@ margin:auto
 .logo{
 display:flex;
 align-items:center;
-gap:10px;
-color:white;
-text-decoration:none
+gap:14px;
+text-decoration:none;
+color:white
 }
 
 .logo img{
-height:60px
+height:70px
+}
+
+.logo strong{
+font-size:22px;
+letter-spacing:2px
 }
 
 nav a{
 color:#cfcfcf;
-margin-left:25px;
-text-decoration:none
+margin-left:30px;
+text-decoration:none;
+font-weight:500
+}
+
+nav a:hover{
+color:white
 }
 
 /* HERO */
 .hero{
+background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.75)),url("portada.jpg");
+background-size:cover;
+background-position:center;
 height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),url("portada.jpg");
-background-size:cover;
+padding:40px
 }
 
+.hero h1{
+font-size:clamp(38px,6vw,80px);
+margin-bottom:20px
+}
+
+.hero p{
+font-size:22px;
+color:#d0d0d0;
+margin-bottom:40px
+}
+
+/* BOTONES */
 .btn{
 background:#25D366;
-padding:14px 30px;
-border-radius:8px;
+padding:16px 38px;
+border-radius:10px;
 color:white;
 text-decoration:none;
+font-weight:600;
+display:inline-block
 }
 
 /* SECCIONES */
 section{
-padding:100px 20px;
-max-width:1200px;
+max-width:1400px;
 margin:auto;
+padding:110px 30px
 }
 
 .section-title{
 text-align:center;
-font-size:40px;
-margin-bottom:40px;
+font-size:46px;
+margin-bottom:70px
+}
+
+/* EXPERIENCIA */
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:40px
+}
+
+.stat{
+background:#0e0e0e;
+padding:50px;
+border-radius:14px;
+text-align:center
+}
+
+.stat h3{
+font-size:60px;
+color:#25D366
+}
+
+/* SERVICIOS */
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px
+}
+
+.card{
+background:#0f0f0f;
+padding:40px;
+border-radius:14px
+}
+
+/* CATALOGO */
+.catalogo iframe{
+width:100%;
+height:700px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,.1)
 }
 
 /* GALERIA */
 .gallery{
 column-count:3;
-gap:10px;
+column-gap:22px
 }
 
 .gallery img{
 width:100%;
-margin-bottom:10px;
-border-radius:10px;
-cursor:pointer;
+margin-bottom:22px;
+border-radius:14px;
+cursor:pointer
 }
 
 /* LIGHTBOX */
@@ -132,25 +200,65 @@ background:rgba(0,0,0,.9);
 display:none;
 align-items:center;
 justify-content:center;
+z-index:9999
 }
 
 #lightbox img{
 max-width:90%;
 max-height:90%;
+border-radius:12px
+}
+
+#lightbox span{
+position:absolute;
+top:30px;
+right:40px;
+font-size:40px;
+cursor:pointer;
+color:white
+}
+
+/* CONTACTO */
+.contact-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px
+}
+
+.contact-form input,
+.contact-form textarea{
+width:100%;
+padding:14px;
+margin-bottom:15px;
+border-radius:8px;
+border:none
 }
 
 /* WHATSAPP */
 .whatsapp-float{
 position:fixed;
-bottom:20px;
-right:20px;
+bottom:25px;
+right:25px;
 background:#25D366;
-width:60px;
-height:60px;
+width:68px;
+height:68px;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
+z-index:999
+}
+
+.whatsapp-float img{
+width:34px
+}
+
+/* FOOTER */
+footer{
+background:#000;
+text-align:center;
+padding:45px;
+color:#8c8c8c
 }
 
 </style>
@@ -165,7 +273,7 @@ justify-content:center;
 
 <a href="#" class="logo">
 <img src="logo.png">
-<strong>TRIASIX</strong>
+<strong>TRIASIX CAPITAL GROUP</strong>
 </a>
 
 <div>
@@ -178,30 +286,43 @@ justify-content:center;
 </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero">
 <h1>Arquitectura en Aluminio y Vidrio</h1>
-<p>Fabricación e instalación en Bogotá</p>
-<a class="btn" href="https://wa.me/573053399795">Cotizar</a>
+<p>Fabricación e instalación profesional en Bogotá</p>
+<a class="btn" href="https://wa.me/573053399795">Cotizar Proyecto</a>
 </section>
 
-<!-- SERVICIOS -->
+<section id="experiencia">
+<h2 class="section-title">Más de 12 años construyendo proyectos</h2>
+
+<div class="stats">
+<div class="stat"><h3 class="counter" data-target="12">0</h3><p>Años</p></div>
+<div class="stat"><h3 class="counter" data-target="50">0</h3><p>Proyectos</p></div>
+<div class="stat"><h3 class="counter" data-target="45">0</h3><p>Clientes</p></div>
+<div class="stat"><h3 class="counter" data-target="150">0</h3><p>Soporte</p></div>
+</div>
+</section>
+
 <section id="servicios">
-<h2 class="section-title">Servicios</h2>
-<p>Ventanas, barandas, divisiones y más.</p>
+<h2 class="section-title">Nuestros Servicios</h2>
+
+<div class="services">
+<div class="card"><h3>Ventanas Proyectantes</h3></div>
+<div class="card"><h3>Ventanas Corredizas</h3></div>
+<div class="card"><h3>Divisiones de Baño</h3></div>
+<div class="card"><h3>Barandas en Vidrio</h3></div>
+</div>
+
 </section>
 
-<!-- CATALOGO -->
 <section id="catalogo">
-<h2 class="section-title">Catálogo</h2>
+<h2 class="section-title">Catálogo de Sistemas</h2>
 
-<iframe src="catalogo-triasix.pdf" width="100%" height="500"></iframe>
-
+<iframe src="catalogo-triasix.pdf"></iframe>
 </section>
 
-<!-- GALERIA -->
 <section id="galeria">
-<h2 class="section-title">Proyectos</h2>
+<h2 class="section-title">Galería</h2>
 
 <div class="gallery">
 <img src="proyecto1.jpg" onclick="openLightbox(this)">
@@ -211,51 +332,75 @@ justify-content:center;
 
 </section>
 
-<!-- LIGHTBOX -->
-<div id="lightbox" onclick="closeLightbox()">
+<div id="lightbox">
+<span onclick="closeLightbox()">✕</span>
 <img id="lightbox-img">
 </div>
 
-<!-- CONTACTO -->
 <section id="contacto">
 <h2 class="section-title">Contacto</h2>
 
-<form action="https://formspree.io/f/xaqpdvpb" method="POST">
-<input type="text" name="nombre" placeholder="Nombre" required><br><br>
-<input type="email" name="email" placeholder="Email" required><br><br>
-<textarea name="mensaje" placeholder="Mensaje"></textarea><br><br>
+<div class="contact-grid">
+
+<form class="contact-form">
+<input type="text" placeholder="Nombre" required>
+<input type="email" placeholder="Email" required>
+<textarea placeholder="Mensaje"></textarea>
 <button class="btn">Enviar</button>
 </form>
 
+<div>
+<p>Tel: 305 339 9795</p>
+<p>Bogotá</p>
+</div>
+
+</div>
+
 </section>
 
-<footer style="text-align:center;padding:30px;">
+<footer>
 © 2026 Triasix Capital Group
 </footer>
 
 <a class="whatsapp-float" href="https://wa.me/573053399795">
-<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="30">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
 </a>
 
 <script>
 
-/* SCROLL BAR */
+/* PROGRESS */
 window.onscroll=function(){
 let winScroll=document.documentElement.scrollTop;
 let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
-let scrolled=(winScroll/height)*100;
-document.getElementById("progressBar").style.width=scrolled+"%";
+document.getElementById("progressBar").style.width=(winScroll/height)*100+"%";
 }
 
 /* HEADER */
-const header=document.getElementById('mainHeader');
+const header=document.getElementById("mainHeader");
 
-window.addEventListener('scroll',()=>{
-if(window.scrollY>50){
-header.classList.add('scrolled')
+window.addEventListener("scroll",()=>{
+if(window.scrollY>60){
+header.classList.add("scrolled")
 }else{
-header.classList.remove('scrolled')
+header.classList.remove("scrolled")
 }
+});
+
+/* COUNTER */
+document.querySelectorAll(".counter").forEach(counter=>{
+let update=()=>{
+let target=+counter.getAttribute("data-target");
+let count=+counter.innerText;
+let increment=target/100;
+
+if(count<target){
+counter.innerText=Math.ceil(count+increment);
+setTimeout(update,20);
+}else{
+counter.innerText=target;
+}
+};
+update();
 });
 
 /* LIGHTBOX */
