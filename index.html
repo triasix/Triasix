@@ -608,6 +608,64 @@ document.getElementById("resultado").innerHTML =
 
 </div>
 <script>
+
+}
+```
+
+</div>
+</section>
+
+<footer>© 2026 Triasix Capital Group</footer>
+
+<a class="whatsapp-float" href="https://wa.me/573053399795">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+</a>
+
+<script>
+
+/* PROGRESS */
+window.onscroll=function(){
+let winScroll=document.documentElement.scrollTop;
+let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+document.getElementById("progressBar").style.width=(winScroll/height)*100+"%";
+}
+
+/* HEADER */
+const header=document.getElementById('mainHeader');
+window.addEventListener('scroll',()=>{
+header.classList.toggle('scrolled',window.scrollY>60);
+});
+
+/* CONTADOR */
+document.querySelectorAll('.counter').forEach(counter=>{
+let update=()=>{
+let target=+counter.dataset.target;
+let count=+counter.innerText;
+let inc=target/100;
+
+if(count<target){
+counter.innerText=Math.ceil(count+inc);
+setTimeout(update,20);
+}else{
+counter.innerText=target;
+}
+};
+update();
+});
+
+/* LIGHTBOX */
+function openLightbox(img){
+document.getElementById("lightbox").style.display="flex";
+document.getElementById("lightbox-img").src=img.src;
+}
+function closeLightbox(){
+document.getElementById("lightbox").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
 ```html id="finalmedidorok"
 <!-- MEDIDOR PRO COMPLETO FUNCIONAL -->
 
@@ -672,61 +730,3 @@ margin:5px 0;
 background:
 ```
 
-}
-```
-
-</div>
-</section>
-
-<footer>© 2026 Triasix Capital Group</footer>
-
-<a class="whatsapp-float" href="https://wa.me/573053399795">
-<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
-</a>
-
-<script>
-
-/* PROGRESS */
-window.onscroll=function(){
-let winScroll=document.documentElement.scrollTop;
-let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
-document.getElementById("progressBar").style.width=(winScroll/height)*100+"%";
-}
-
-/* HEADER */
-const header=document.getElementById('mainHeader');
-window.addEventListener('scroll',()=>{
-header.classList.toggle('scrolled',window.scrollY>60);
-});
-
-/* CONTADOR */
-document.querySelectorAll('.counter').forEach(counter=>{
-let update=()=>{
-let target=+counter.dataset.target;
-let count=+counter.innerText;
-let inc=target/100;
-
-if(count<target){
-counter.innerText=Math.ceil(count+inc);
-setTimeout(update,20);
-}else{
-counter.innerText=target;
-}
-};
-update();
-});
-
-/* LIGHTBOX */
-function openLightbox(img){
-document.getElementById("lightbox").style.display="flex";
-document.getElementById("lightbox-img").src=img.src;
-}
-function closeLightbox(){
-document.getElementById("lightbox").style.display="none";
-}
-
-</script>
-
-</body>
-</html>
-```html id="prosoundx01"
