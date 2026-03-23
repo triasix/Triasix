@@ -405,233 +405,168 @@ button{cursor:pointer;}
 </style>
 
 </head>
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Triasix Cotizador Real</title>
+
+<style>
+body{
+  font-family:Arial;
+  background:#0b0b0b;
+  color:white;
+  margin:0;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+
+.box{
+  background:#111;
+  padding:15px;
+  border-radius:10px;
+  margin:10px 0;
+}
+
+select,input,button{
+  width:100%;
+  padding:10px;
+  margin:5px 0;
+  border:none;
+  border-radius:5px;
+}
+
+button{
+  background:#00c853;
+  color:white;
+  cursor:pointer;
+}
+
+h2{text-align:center;}
+
+.result{
+  font-size:18px;
+  color:#00e676;
+}
+
+</style>
+
+</head>
 
 <body>
 
-<h1>Catálogo + Cotizador Triasix</h1>
+<div class="container">
 
-<!-- FILTROS -->
-
-<div class="filtros">
-<button class="active" onclick="filtrar('all')">Todos</button>
-<button onclick="filtrar('corredizo')">Corredizos</button>
-<button onclick="filtrar('proyectante')">Proyectantes</button>
-</div>
-
-<!-- CATÁLOGO -->
-
-<div id="catalogo" class="grid">
-
-<div class="card" data-tipo="corredizo" onclick="abrir('744')">
-<img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c">
-<h3>Corredizo 744</h3>
-</div>
-
-<div class="card" data-tipo="corredizo" onclick="abrir('8025')">
-<img src="https://images.unsplash.com/photo-1600573472550-8090b5e0745e">
-<h3>Corredizo 8025</h3>
-</div>
-
-<div class="card" data-tipo="proyectante" onclick="abrir('3831')">
-<img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea">
-<h3>Proyectante 3831</h3>
-</div>
-
-<div class="card" data-tipo="proyectante" onclick="abrir('aragon')">
-<img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d">
-<h3>Proyectante Aragón</h3>
-</div>
-
-</div>
-
-<!-- DETALLES + COTIZADOR -->
-
-<div id="744" class="detalle">
-<button class="volver" onclick="volver()">← Volver</button>
-<h2>Corredizo 744</h2>
-
-<div class="box">Sistema intermedio, buen sellamiento</div>
-<div class="box">Colores: Negro / Blanco / Madera</div>
-<div class="box">Vidrio: 5mm / Laminado</div>
+<h2>Cotizador Profesional Triasix</h2>
 
 <div class="box">
 
-<select id="color744">
-<option value="1">Transparente</option>
-<option value="1.1">Azul</option>
-<option value="1.15">Gris</option>
-<option value="1.3">Reflectivo</option>
+<label>Sistema</label> <select id="sistema">
+
+<option value="190000">Corredizo 50-20</option>
+<option value="220000">Corredizo 744</option>
+<option value="260000">Proyectante Tradicional</option>
 </select>
 
-<select id="tipo744">
-<option value="1">Normal</option>
-<option value="1.3">Templado</option>
-<option value="1.5">Laminado</option>
-<option value="1.8">Acústico</option>
+<label>Color Aluminio</label> <select id="color">
+
+<option value="0">Blanco Mate</option>
+<option value="0.10">Negro / Anodizado / Madera</option>
 </select>
 
-<input id="ancho744" placeholder="Ancho">
-<input id="alto744" placeholder="Alto">
+<label>Hojas</label> <select id="hojas">
 
-<button onclick="calc('744',320000)">Calcular</button>
+<option value="0">2 hojas</option>
+<option value="0.30">Más de 2 hojas</option>
+</select>
 
-<p id="res744"></p>
-<p id="reco744" class="reco"></p>
+<label>Divisiones</label> <select id="divisiones">
 
-<button class="whatsapp" onclick="wa('744')">Cotizar por WhatsApp</button>
+<option value="0">Sin divisiones</option>
+<option value="0.30">Con divisiones</option>
+</select>
+
+<label>Tipo de Vidrio</label> <select id="tipo">
+
+<option value="0">Crudo</option>
+<option value="0.40">Templado</option>
+<option value="0.60">Laminado</option>
+</select>
+
+<label>Espesor</label> <select id="espesor">
+
+<option value="0">4 mm</option>
+<option value="0.10">5 mm</option>
+<option value="0.20">6 mm</option>
+</select>
+
+<label>Basculantes (solo proyectante)</label> <select id="basculante">
+
+<option value="0">1 incluido</option>
+<option value="0.30">2 basculantes</option>
+<option value="0.60">3 basculantes</option>
+</select>
+
+<label>Ancho (m)</label> <input id="ancho">
+
+<label>Alto (m)</label> <input id="alto">
+
+<button onclick="calcular()">Calcular</button>
 
 </div>
-</div>
-
-<div id="8025" class="detalle">
-<button class="volver" onclick="volver()">← Volver</button>
-<h2>Corredizo 8025</h2>
-
-<div class="box">Sistema pesado premium</div>
-<div class="box">Colores premium</div>
-<div class="box">Vidrio: Laminado 4+4</div>
 
 <div class="box">
-
-<select id="color8025">
-<option value="1">Transparente</option>
-<option value="1.2">Bronce</option>
-<option value="1.3">Reflectivo</option>
-</select>
-
-<select id="tipo8025">
-<option value="1.5">Laminado</option>
-<option value="1.8">Acústico</option>
-</select>
-
-<input id="ancho8025" placeholder="Ancho">
-<input id="alto8025" placeholder="Alto">
-
-<button onclick="calc('8025',350000)">Calcular</button>
-
-<p id="res8025"></p>
-<p id="reco8025" class="reco"></p>
-
-<button class="whatsapp" onclick="wa('8025')">Cotizar por WhatsApp</button>
-
-</div>
+<h3>Resultado</h3>
+<p id="resultado" class="result"></p>
 </div>
 
-<div id="3831" class="detalle">
-<button class="volver" onclick="volver()">← Volver</button>
-<h2>Proyectante 3831</h2>
-
-<div class="box">Alta hermeticidad</div>
-<div class="box">Colores: Negro / Blanco</div>
-<div class="box">Vidrio: Laminado</div>
-
-<div class="box">
-
-<select id="color3831">
-<option value="1">Transparente</option>
-<option value="1.15">Gris</option>
-</select>
-
-<select id="tipo3831">
-<option value="1.5">Laminado</option>
-<option value="1.8">Acústico</option>
-</select>
-
-<input id="ancho3831" placeholder="Ancho">
-<input id="alto3831" placeholder="Alto">
-
-<button onclick="calc('3831',340000)">Calcular</button>
-
-<p id="res3831"></p>
-<p id="reco3831" class="reco"></p>
-
-<button class="whatsapp" onclick="wa('3831')">Cotizar por WhatsApp</button>
-
-</div>
-</div>
-
-<div id="aragon" class="detalle">
-<button class="volver" onclick="volver()">← Volver</button>
-<h2>Proyectante Aragón</h2>
-
-<div class="box">Sistema premium</div>
-<div class="box">Colores: Negro / Gris / Madera</div>
-<div class="box">Vidrio: Laminado / Acústico</div>
-
-<div class="box">
-
-<select id="coloraragon">
-<option value="1">Transparente</option>
-<option value="1.2">Bronce</option>
-<option value="1.3">Reflectivo</option>
-</select>
-
-<select id="tipoaragon">
-<option value="1.5">Laminado</option>
-<option value="1.8">Acústico</option>
-</select>
-
-<input id="anchoaragon" placeholder="Ancho">
-<input id="altoaragon" placeholder="Alto">
-
-<button onclick="calc('aragon',370000)">Calcular</button>
-
-<p id="resaragon"></p>
-<p id="recoaragon" class="reco"></p>
-
-<button class="whatsapp" onclick="wa('aragon')">Cotizar por WhatsApp</button>
-
-</div>
 </div>
 
 <script>
 
-function filtrar(tipo){
-let cards=document.querySelectorAll(".card");
-cards.forEach(c=>{
-c.style.display=(tipo==="all"||c.dataset.tipo===tipo)?"block":"none";
-});
+function calcular(){
+
+let base = parseFloat(document.getElementById("sistema").value);
+let color = parseFloat(document.getElementById("color").value);
+let hojas = parseFloat(document.getElementById("hojas").value);
+let divisiones = parseFloat(document.getElementById("divisiones").value);
+let tipo = parseFloat(document.getElementById("tipo").value);
+let espesor = parseFloat(document.getElementById("espesor").value);
+let basculante = parseFloat(document.getElementById("basculante").value);
+
+let ancho = document.getElementById("ancho").value;
+let alto = document.getElementById("alto").value;
+
+if(!ancho || !alto){
+alert("Ingresa medidas");
+return;
 }
 
-function abrir(id){
-document.getElementById("catalogo").style.display="none";
-document.getElementById(id).style.display="block";
-}
+let area = ancho * alto;
 
-function volver(){
-document.getElementById("catalogo").style.display="grid";
-document.querySelectorAll(".detalle").forEach(d=>d.style.display="none");
-}
+// SUMA DE PORCENTAJES
+let totalFactor = 1 + color + hojas + divisiones + tipo + espesor + basculante;
 
-function calc(id,precio){
+// PRECIO FINAL
+let precioM2 = base * totalFactor;
+let total = precioM2 * area;
 
-let color=document.getElementById("color"+id).value;
-let tipo=document.getElementById("tipo"+id).value;
-let ancho=document.getElementById("ancho"+id).value;
-let alto=document.getElementById("alto"+id).value;
+document.getElementById("resultado").innerHTML =
+"Precio m²: $" + precioM2.toLocaleString() + "<br>" +
+"Área: " + area.toFixed(2) + " m²<br>" +
+"TOTAL: $" + total.toLocaleString();
 
-if(!ancho||!alto){alert("Faltan medidas");return;}
-
-let area=ancho*alto;
-let total=area*precio*color*tipo;
-
-document.getElementById("res"+id).innerHTML="Total: $"+total.toLocaleString();
-
-let reco = tipo>=1.8 ? "🔇 Alta insonorización" :
-           tipo>=1.5 ? "🛡️ Seguridad alta" :
-           tipo>=1.3 ? "💪 Resistente" :
-           "💰 Económico";
-
-document.getElementById("reco"+id).innerHTML=reco;
-
-}
-
-function wa(id){
-let txt=document.getElementById("res"+id).innerText;
-window.open("https://wa.me/573053399795?text="+txt);
 }
 
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
