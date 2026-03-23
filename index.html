@@ -543,6 +543,59 @@ document.getElementById("resultado").innerHTML =
 </body>
 </html>
 ```
+```html id="prosoundx01"
+<!-- MEDIDOR DE SONIDO PRO -->
+<div class="sound-meter-pro">
+
+<h3>Medidor de Ruido Inteligente</h3>
+
+<div class="meter">
+<div id="barra"></div>
+</div>
+
+<div id="db">0 dB</div>
+<div id="nivel">Nivel: -</div>
+
+<canvas id="grafica" height="100"></canvas>
+
+<button onclick="iniciarAudio()">Activar Micrófono</button>
+<a id="whatsappBtn" target="_blank" class="btn-wsp">Enviar Resultado</a>
+
+</div>
+
+<style>
+
+.sound-meter-pro{
+margin-top:60px;
+background:#111;
+padding:40px;
+border-radius:16px;
+max-width:700px;
+margin:auto;
+text-align:center;
+box-shadow:0 0 30px rgba(0,0,0,0.5);
+}
+
+.meter{
+width:100%;
+height:20px;
+background:#222;
+border-radius:10px;
+overflow:hidden;
+margin:20px 0;
+}
+
+#barra{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#00ffcc,#00c2ff,#ff0055);
+transition:0.1s;
+}
+
+#db{
+font-size:32px;
+color:#00ffcc;
+```
 
 }
 </section>
