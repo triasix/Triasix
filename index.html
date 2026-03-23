@@ -498,119 +498,89 @@ label{
 
 <div class="container">
 
-<h2>🔧 Panel + Cotizador Triasix</h2>
+<!DOCTYPE html>
 
-<!-- ADMIN PRECIOS -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Cotizador Triasix PRO</title>
 
-<div class="box">
+<style>
+body{
+  font-family: Arial;
+  background:#0b0b0b;
+  color:white;
+  margin:0;
+}
 
-<h3>⚙️ Configuración de Precios</h3>
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
 
-<div class="grid">
+h2{text-align:center;}
 
-<div>
-<label>Corredizo 50-20</label>
-<input id="p1" value="250000">
-</div>
+.box{
+  background:#111;
+  padding:15px;
+  border-radius:10px;
+  margin:15px 0;
+}
 
-<div>
-<label>Corredizo 744</label>
-<input id="p2" value="320000">
-</div>
+select,input,button{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border:none;
+  border-radius:5px;
+}
 
-<div>
-<label>Corredizo 8025</label>
-<input id="p3" value="350000">
-</div>
+button{
+  background:#00c853;
+  color:white;
+  cursor:pointer;
+}
 
-<div>
-<label>Monumetal 70-38</label>
-<input id="p4" value="380000">
-</div>
+</style>
 
-<div>
-<label>Kymballa / Kocep</label>
-<input id="p5" value="420000">
-</div>
+</head>
 
-<div>
-<label>Proyectante Tradicional</label>
-<input id="p6" value="280000">
-</div>
+<body>
 
-<div>
-<label>Proyectante 416</label>
-<input id="p7" value="300000">
-</div>
+<div class="container">
 
-<div>
-<label>Proyectante 3831</label>
-<input id="p8" value="340000">
-</div>
-
-<div>
-<label>Proyectante Aragón</label>
-<input id="p9" value="370000">
-</div>
-
-</div>
-
-<hr>
-
-<h3>🪟 Multiplicadores de Vidrio</h3>
-
-<div class="grid">
-
-<div><label>Transparente</label><input id="v1" value="1"></div>
-<div><label>Verde</label><input id="v2" value="1.05"></div>
-<div><label>Azul</label><input id="v3" value="1.1"></div>
-<div><label>Gris</label><input id="v4" value="1.15"></div>
-<div><label>Bronce</label><input id="v5" value="1.2"></div>
-<div><label>Reflectivo</label><input id="v6" value="1.3"></div>
-<div><label>Satinado</label><input id="v7" value="1.25"></div>
-
-<div><label>Templado</label><input id="t1" value="1.3"></div>
-<div><label>Laminado</label><input id="t2" value="1.5"></div>
-<div><label>Acústico</label><input id="t3" value="1.8"></div>
-
-</div>
-
-</div>
-
-<!-- COTIZADOR -->
+<h2>Cotizador Triasix</h2>
 
 <div class="box">
-
-<h3>📊 Cotizador</h3>
 
 <select id="sistema">
-<option value="">Sistema</option>
-<option value="p1">Corredizo 50-20</option>
-<option value="p2">Corredizo 744</option>
-<option value="p3">Corredizo 8025</option>
-<option value="p4">Monumetal 70-38</option>
-<option value="p5">Kymballa / Kocep</option>
-<option value="p6">Proyectante Tradicional</option>
-<option value="p7">Proyectante 416</option>
-<option value="p8">Proyectante 3831</option>
-<option value="p9">Proyectante Aragón</option>
+<option value="5020">Corredizo 50-20</option>
+<option value="744">Corredizo 744</option>
+<option value="8025">Corredizo 8025</option>
+<option value="7038">Monumetal 70-38</option>
+<option value="kymballa">Kymballa / Kocep</option>
+<option value="tradicional">Proyectante Tradicional</option>
+<option value="416">Proyectante 416</option>
+<option value="3831">Proyectante 3831 1101</option>
+<option value="aragon">Proyectante Aragón</option>
 </select>
 
 <select id="color">
-<option value="v1">Transparente</option>
-<option value="v2">Verde</option>
-<option value="v3">Azul</option>
-<option value="v4">Gris</option>
-<option value="v5">Bronce</option>
-<option value="v6">Reflectivo</option>
-<option value="v7">Satinado</option>
+<option value="transparente">Transparente</option>
+<option value="verde">Verde</option>
+<option value="azul">Azul</option>
+<option value="gris">Gris Humo</option>
+<option value="bronce">Bronce</option>
+<option value="reflectivo">Reflectivo</option>
+<option value="satinado">Satinado</option>
 </select>
 
 <select id="tipo">
-<option value="1">Normal</option>
-<option value="t1">Templado</option>
-<option value="t2">Laminado</option>
-<option value="t3">Acústico</option>
+<option value="normal">Normal</option>
+<option value="templado">Templado</option>
+<option value="laminado">Laminado</option>
+<option value="acustico">Acústico</option>
 </select>
 
 <input id="ancho" placeholder="Ancho (m)">
@@ -626,26 +596,50 @@ label{
 
 <script>
 
-function getVal(id){
-  return parseFloat(document.getElementById(id).value);
-}
+/* 🔒 CONFIGURACIÓN INTERNA (SOLO TÚ EDITAS AQUÍ) */
+
+const preciosSistema = {
+  "5020": 250000,
+  "744": 320000,
+  "8025": 350000,
+  "7038": 380000,
+  "kymballa": 420000,
+  "tradicional": 280000,
+  "416": 300000,
+  "3831": 340000,
+  "aragon": 370000
+};
+
+const vidrioColor = {
+  "transparente": 65000,
+  "verde": 100000,
+  "azul": 70000,
+  "gris": 70000,
+  "bronce": 70000,
+  "reflectivo": 80000,
+  "satinado": 90000
+};
+
+const vidrioTipo = {
+  "normal": 65000,
+  "templado":160000,
+  "laminado": 90000,
+  "acustico": 350000
+};
+
+/* 🔥 COTIZADOR */
 
 function calcular(){
 
-let sistemaId = document.getElementById("sistema").value;
-let colorId = document.getElementById("color").value;
-let tipoId = document.getElementById("tipo").value;
-
-let sistema = getVal(sistemaId);
-let color = getVal(colorId);
-
-let tipo = tipoId === "1" ? 1 : getVal(tipoId);
+let sistema = preciosSistema[document.getElementById("sistema").value];
+let color = vidrioColor[document.getElementById("color").value];
+let tipo = vidrioTipo[document.getElementById("tipo").value];
 
 let ancho = document.getElementById("ancho").value;
 let alto = document.getElementById("alto").value;
 
-if(!sistema || !ancho || !alto){
-alert("Faltan datos");
+if(!ancho || !alto){
+alert("Ingresa medidas");
 return;
 }
 
@@ -658,6 +652,10 @@ document.getElementById("resultado").innerHTML =
 }
 
 </script>
+
+</body>
+</html>
+
 
 </body>
 </html>
