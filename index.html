@@ -315,6 +315,94 @@ color:#8c8c8c
 </div>
 </section>
 
+  <div class="calc-box">
+
+  <h2>Calcula tu Nivel de Ruido</h2>
+
+  <label>Tipo de ruido:</label>
+  <select id="tipoRuido">
+    <option value="50">Tráfico leve</option>
+    <option value="60" selected>Tráfico moderado</option>
+    <option value="80">Tráfico alto</option>
+  </select>
+
+  <label>Nivel estimado (dB): <span id="valorNivel">60</span> dB</label>
+  <input type="range" id="nivel" min="30" max="100" value="60" oninput="actualizarNivel(this.value)">
+
+  <button onclick="calcularRuido()">Calcular aislamiento</button>
+
+  <div id="resultado"></div>
+
+</div>
+
+<script>
+function actualizarNivel(valor){
+  document.getElementById("valorNivel").innerText = valor;
+}
+
+function calcularRuido(){
+  let nivel = document.getElementById("nivel").value;
+  let reduccion = 30; // promedio vidrio acústico
+
+  let resultadoFinal = nivel - reduccion;
+
+  let mensaje = `
+    <p><strong>Nivel exterior:</strong> ${nivel} dB</p>
+    <p><strong>Nivel interior estimado:</strong> ${resultadoFinal} dB</p>
+  `;
+
+  document.getElementById("resultado").innerHTML = mensaje;
+}
+</script>
+
+<style>
+.calc-box {
+  max-width: 500px;
+  margin: auto;
+  background: #0f0f0f;
+  padding: 40px;
+  border-radius: 12px;
+  color: white;
+}
+
+.calc-box label {
+  display: block;
+  margin-top: 20px;
+  color: #ccc;
+}
+
+.calc-box select,
+.calc-box input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #1a1a1a;
+  color: white;
+}
+
+button {
+  margin-top: 20px;
+  padding: 15px;
+  width: 100%;
+  background: #2ecc71;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#resultado {
+  margin-top: 30px;
+  padding: 20px;
+  background: #111;
+  border-radius: 10px;
+  color: #25D366;
+  font-weight: 500;
+}
+</style>
 <!-- CATALOGO -->
 <section id="catalogo">
 <h2 class="section-title">Catálogo de Sistemas</h2>
