@@ -1151,6 +1151,11 @@ document.getElementById("lightbox").style.display="none";
 <div id="cotizacion"></div>
 
 <button onclick="iniciarAudio()">Iniciar Medición</button>
+
+<button onclick="detenerMedicion()" style="background:#ff4444;">
+⛔ Detener Medición
+</button>
+
 <button onclick="modoDemo()">Modo Demo</button>
 
 <a id="whatsappBtn" target="_blank">Enviar a WhatsApp</a>
@@ -1213,6 +1218,23 @@ text-decoration:none;
 
 <script>
 
+  function detenerMedicion(){
+
+midiendo = false;
+
+if(mediciones.length > 0){
+
+let total = mediciones.reduce((a,b)=>a+b,0);
+let promedio = Math.round(total / mediciones.length);
+
+mostrarResultado(promedio);
+
+}
+
+document.getElementById("estado").innerText = "Medición detenida";
+
+}
+
 let audioContext, analyser, dataArray;
 let bars = [];
 let mediciones = [];
@@ -1252,7 +1274,7 @@ dataArray = new Uint8Array(analyser.frequencyBinCount);
 mediciones = [];
 midiendo = true;
 
-document.getElementById("estado").innerText="Midiendo 10 segundos...";
+document.getElementById("estado").innerText="Midiendo 30 segundos...";
 
 loop();
 
