@@ -664,24 +664,23 @@ document.getElementById("lightbox").style.display="none";
 
 </script>
 
-<!-- MEDIDOR PRO + GRAFICO DE BARRAS -->
+<!-- MEDIDOR PRO + RESULTADO 10 SEGUNDOS -->
 <div class="sound-meter-pro">
 
-<h3>Medidor + Cotización</h3>
+<h3>Medición Profesional (10s)</h3>
 
-<!-- BARRAS -->
 <div id="bars"></div>
 
 <div id="db">0 dB</div>
 <div id="nivel">Nivel: Esperando...</div>
-<div id="estado">Presiona activar</div>
+<div id="estado">Presiona iniciar</div>
 
 <input type="number" id="ancho" placeholder="Ancho (m)">
 <input type="number" id="alto" placeholder="Alto (m)">
 
 <div id="cotizacion"></div>
 
-<button onclick="iniciarAudio()">Activar Micrófono</button>
+<button onclick="iniciarAudio()">Iniciar Medición</button>
 <button onclick="modoDemo()">Modo Demo</button>
 
 <a id="whatsappBtn" target="_blank">Enviar a WhatsApp</a>
@@ -699,7 +698,6 @@ text-align:center;
 color:#fff;
 }
 
-/* CONTENEDOR BARRAS */
 #bars{
 display:flex;
 align-items:flex-end;
@@ -708,7 +706,6 @@ height:120px;
 margin:20px 0;
 }
 
-/* CADA BARRA */
 .bar{
 width:8px;
 background:linear-gradient(to top,#00ffcc,#ff0055);
@@ -748,8 +745,10 @@ text-decoration:none;
 
 let audioContext, analyser, dataArray;
 let bars = [];
+let mediciones = [];
+let midiendo = false;
 
-// 🔊 CREAR BARRAS
+// CREAR BARRAS
 function crearBarras(){
 const cont = document.getElementById("bars");
 cont.innerHTML = "";
@@ -763,10 +762,9 @@ cont.appendChild(bar);
 bars.push(bar);
 }
 }
-
 crearBarras();
 
-// 🔊 MICROFONO
+// INICIAR MICROFONO + MEDICION
 async function iniciarAudio(){
 try{
 
@@ -781,27 +779,34 @@ source.connect(analyser);
 analyser.fftSize = 128;
 dataArray = new Uint8Array(analyser.frequencyBinCount);
 
-document.getElementById("estado").innerText="Micrófono activo";
+mediciones = [];
+midiendo = true;
+
+document.getElementById("estado").innerText="Midiendo 10 segundos...";
 
 loop();
 
+// ⏱ DETENER A LOS 10s
+setTimeout(finalizarMedicion,10000);
+
 }catch(e){
-document.getElementById("estado").innerText="ERROR: usa HTTPS o permite micrófono";
+document.getElementById("estado").innerText="ERROR micrófono / HTTPS";
 }
 }
 
-// 🔁 LOOP PRINCIPAL
+// LOOP
 function loop(){
+
+if(!midiendo) return;
 
 analyser.getByteFrequencyData(dataArray);
 
-// ANIMAR BARRAS
+// ANIMACION
 for(let i=0;i<bars.length;i++){
-let value = dataArray[i];
-bars[i].style.height = (value*1.5)+"px";
+bars[i].style.height = (dataArray[i]*1.5)+"px";
 }
 
-// CALCULAR DB PROMEDIO
+// PROMEDIO INSTANTANEO
 let sum = 0;
 for(let i=0;i<dataArray.length;i++){
 sum += dataArray[i];
@@ -809,27 +814,57 @@ sum += dataArray[i];
 
 let db = Math.round(sum / dataArray.length);
 
-actualizar(db);
+// GUARDAR MEDICION
+mediciones.push(db);
+
+document.getElementById("db").innerText=db+" dB";
 
 requestAnimationFrame(loop);
 }
 
-// 🎮 DEMO
+// FINALIZAR
+function finalizarMedicion(){
+
+midiendo = false;
+
+// PROMEDIO FINAL
+let total = mediciones.reduce((a,b)=>a+b,0);
+let promedio = Math.round(total / mediciones.length);
+
+mostrarResultado(promedio);
+
+document.getElementById("estado").innerText="Medición finalizada";
+}
+
+// DEMO
 function modoDemo(){
-setInterval(()=>{
+
+mediciones = [];
+midiendo = true;
+
+document.getElementById("estado").innerText="Demo 10 segundos...";
+
+let intervalo = setInterval(()=>{
 
 for(let i=0;i<bars.length;i++){
 bars[i].style.height = (Math.random()*120)+"px";
 }
 
 let db = Math.floor(Math.random()*100);
-actualizar(db);
+mediciones.push(db);
+
+document.getElementById("db").innerText=db+" dB";
 
 },200);
+
+setTimeout(()=>{
+clearInterval(intervalo);
+finalizarMedicion();
+},10000);
 }
 
-// 💰 CALCULO + UI
-function actualizar(db){
+// RESULTADO FINAL
+function mostrarResultado(db){
 
 document.getElementById("db").innerText=db+" dB";
 
@@ -840,27 +875,27 @@ if(db<40){nivel="Bajo";precio=220000;}
 else if(db<70){nivel="Medio";precio=320000;}
 else{nivel="Alto";precio=450000;}
 
-document.getElementById("nivel").innerText="Nivel: "+nivel;
+document.getElementById("nivel").innerText="Nivel final: "+nivel;
 
 // MEDIDAS
 let a = parseFloat(document.getElementById("ancho").value);
 let b = parseFloat(document.getElementById("alto").value);
 
-let texto = "Ruido: "+db+" dB - Nivel: "+nivel;
+let texto = "RESULTADO FINAL → "+db+" dB ("+nivel+")";
 
-// SI HAY MEDIDAS
+// COTIZACION
 if(a>0 && b>0){
 let total = a*b*precio;
 
 document.getElementById("cotizacion").innerText =
-"Precio: $" + total.toLocaleString();
+"Precio estimado: $" + total.toLocaleString();
 
 texto += " | Medidas: "+a+"x"+b+" | Precio: $"+total.toLocaleString();
 }
 
 // WHATSAPP
 document.getElementById("whatsappBtn").href =
-"https://wa.me/573053399795?text="+encodeURIComponent(texto);
+"https://wa.me/573000000000?text="+encodeURIComponent(texto);
 
 }
 
