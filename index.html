@@ -231,6 +231,188 @@ text-align:center;
 padding:45px;
 color:#8c8c8c
 }
+</section> <!-- servicios -->
+  <section id="antiruido" class="antiruido">
+
+<div class="antiruido-content">
+
+<div class="antiruido-text">
+
+<h2>Ventanas Acústicas (Antiruido)</h2>
+
+<p>
+Soluciones especializadas para reducir el ruido exterior en apartamentos,
+oficinas y espacios comerciales. Nuestros sistemas termoacústicos combinan
+vidrios laminados y perfilería de alta calidad para garantizar confort,
+aislamiento y diseño moderno.
+</p>
+
+<ul>
+<li>✔ Reducción de ruido hasta 80%</li>
+<li>✔ Vidrio laminado 3+3 / 4+4</li>
+<li>✔ Sellado hermético profesional</li>
+<li>✔ Diseño moderno y elegante</li>
+</ul>
+
+<a href="https://wa.me/573053399795" class="btn">
+Cotizar Ventanas Antiruido
+</a>
+
+</div>
+
+<div class="antiruido-img">
+
+<img src="antiruido1.jpg">
+
+</div>
+
+</div>
+
+<div class="antiruido-gallery">
+
+<img src="antiruido1.jpg">
+<img src="antiruido2.jpg">
+<img src="antiruido3.jpg">
+<img src="antiruido4.jpg">
+
+</div>
+
+</section>
+</style>
+  /* SECCION ANTIRUIDO */
+
+.antiruido{
+background:#0a0a0a;
+padding:120px 30px;
+}
+
+.antiruido-content{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+max-width:1200px;
+margin:auto;
+}
+
+.antiruido-text h2{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.antiruido-text p{
+color:#bbb;
+line-height:1.7;
+}
+
+.antiruido-text ul{
+margin-top:20px;
+color:#ccc;
+}
+
+.antiruido-text li{
+margin-bottom:10px;
+}
+
+.antiruido-img img{
+width:100%;
+border-radius:16px;
+}
+
+.antiruido-gallery{
+margin-top:60px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+max-width:1200px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.antiruido-gallery img{
+width:100%;
+border-radius:12px;
+transition:0.3s;
+}
+
+.antiruido-gallery img:hover{
+transform:scale(1.05);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+.antiruido-content{
+grid-template-columns:1fr;
+}
+}
+  <section id="calculadora-ruido">
+
+<h2 class="section-title">Calcula tu Nivel de Ruido</h2>
+
+<div class="calc-box">
+
+<label>Tipo de ruido:</label>
+
+<select id="tipoRuido">
+<option value="60">Tráfico moderado</option>
+<option value="75">Tráfico pesado</option>
+<option value="85">Discoteca / bares</option>
+<option value="95">Construcción / industrial</option>
+</select>
+
+<label>Nivel estimado (dB):</label>
+
+<input type="range" id="nivel" min="40" max="100" value="60" oninput="actualizarNivel(this.value)">
+<p id="valorNivel">60 dB</p>
+
+<button onclick="calcularRuido()" class="btn">
+Calcular aislamiento
+</button>
+
+<div id="resultado"></div>
+/* CALCULADORA */
+
+.calc-box{
+max-width:500px;
+margin:auto;
+background:#0f0f0f;
+padding:40px;
+border-radius:12px;
+text-align:left;
+}
+
+.calc-box label{
+display:block;
+margin-top:20px;
+color:#ccc;
+}
+
+.calc-box select,
+.calc-box input{
+width:100%;
+margin-top:10px;
+padding:10px;
+border-radius:8px;
+border:none;
+background:#1a1a1a;
+color:white;
+}
+
+#resultado{
+margin-top:30px;
+padding:20px;
+background:#111;
+border-radius:10px;
+color:#25D366;
+font-weight:500;
+}
+</div>
+
+</section>
+</head>
+
+<body>
 
 <div id="progressBar"></div>
 
@@ -287,107 +469,7 @@ color:#8c8c8c
 <h3 class="counter" data-target="150">0</h3>
 <p>Soporte y Atención</p>
 </div>
-<section id="antiruido" class="antiruido">
 
-  <div class="antiruido-content">
-
-    <!-- TEXTO -->
-    <div class="antiruido-text">
-
-      <h2>Ventanas Acústicas (Antiruido)</h2>
-
-      <p>
-        Soluciones especializadas para reducir el ruido exterior en apartamentos,
-        oficinas y espacios comerciales en Bogotá. Nuestros sistemas termoacústicos
-        combinan vidrios laminados y perfilería de alta calidad para garantizar confort,
-        aislamiento y diseño moderno.
-      </p>
-
-      <ul>
-        <li>✔ Reducción de ruido hasta 80%</li>
-        <li>✔ Vidrio laminado 3+3 / 4+4</li>
-        <li>✔ Sellado hermético profesional</li>
-        <li>✔ Diseño moderno y elegante</li>
-      </ul>
-
-      <a href="https://api.whatsapp.com/send?phone=573053399795" class="btn">
-        Cotizar Ventanas Antiruido
-      </a>
-
-    </div>
-
-    <!-- IMAGEN -->
-    <div class="antiruido-img">
-      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="ventanas acústicas">
-    </div>
-
-  </div>
-
-</section>
-
-<style>
-
-.antiruido {
-  background: #0b0b0b;
-  padding: 80px 20px;
-  color: white;
-}
-
-/* CONTENEDOR */
-.antiruido-content {
-  max-width: 1100px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-}
-
-/* TEXTO */
-.antiruido-text h2 {
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
-.antiruido-text p {
-  color: #ccc;
-  margin-bottom: 20px;
-}
-
-.antiruido-text ul {
-  margin-bottom: 20px;
-}
-
-.antiruido-text li {
-  margin-bottom: 10px;
-}
-
-/* BOTÓN */
-.btn {
-  display: inline-block;
-  padding: 15px 25px;
-  background: #25D366;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-}
-
-/* IMAGEN */
-.antiruido-img img {
-  width: 100%;
-  border-radius: 12px;
-  object-fit: cover;
-}
-
-/* RESPONSIVE */
-@media(max-width: 768px){
-  .antiruido-content {
-    grid-template-columns: 1fr;
-  }
-}
-
-</style>
 </div>
 
 </section>
@@ -520,269 +602,7 @@ y comerciales.
 <p style="color:#bbb"><strong>Email:</strong> ventas@ventanastriasix.com</p>
 
 </div>
-<section class="acustica-section">
 
-  <div class="container">
-
-    <h2>Ventanería Acústica en Bogotá</h2>
-    <p class="subtitle">
-      Reduce el ruido exterior hasta en un 80% con sistemas profesionales en aluminio y vidrio acústico.
-    </p>
-
-    <!-- GALERÍA -->
-    <div class="galeria">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498b" alt="">
-        <h3>Ventanas Corredizas</h3>
-        <p>Sistemas modernos que combinan estética, ventilación y aislamiento acústico.</p>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="">
-        <h3>Vidrio Laminado</h3>
-        <p>Tecnología 3+3 y 4+4 que reduce vibraciones del sonido exterior.</p>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae" alt="">
-        <h3>Doble Vidrio (DVH)</h3>
-        <p>Cámara de aire interna que bloquea eficazmente el ruido.</p>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36" alt="">
-        <h3>Instalación Hermética</h3>
-        <p>Sellado profesional que garantiza el máximo rendimiento acústico.</p>
-      </div>
-    </div>
-
-    <!-- TABLA -->
-    <div class="tabla">
-      <h3>Nivel de Reducción de Ruido</h3>
-
-      <table>
-        <tr>
-          <th>Sistema</th>
-          <th>Reducción</th>
-        </tr>
-        <tr>
-          <td>Laminado 3+3</td>
-          <td>25 – 30 dB</td>
-        </tr>
-        <tr>
-          <td>Laminado 4+4</td>
-          <td>30 – 35 dB</td>
-        </tr>
-        <tr>
-          <td>DVH</td>
-          <td>35 – 45 dB</td>
-        </tr>
-        <tr>
-          <td>DVH + acústico</td>
-          <td>Hasta 50 dB</td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- CALCULADORA -->
-    <div class="calc-box">
-      <h3>Calcula tu reducción de ruido</h3>
-
-      <label>Nivel exterior (dB): <span id="valorNivel">70</span></label>
-      <input type="range" id="nivel" min="40" max="100" value="70"
-        oninput="actualizarNivel(this.value)">
-
-      <label>Tipo de sistema:</label>
-      <select id="tipo">
-        <option value="30">Laminado 3+3</option>
-        <option value="35">Laminado 4+4</option>
-        <option value="40">DVH</option>
-        <option value="50">DVH + acústico</option>
-      </select>
-
-      <button onclick="calcular()">Calcular</button>
-
-      <div id="resultado"></div>
-    </div>
-
-    <!-- CTA -->
-    <div class="cta">
-      <h3>Cotiza en Bogotá</h3>
-      <p>Asesoría gratuita y diseño a medida.</p>
-      <a href="https://wa.me/573053399795" target="_blank">Cotizar por WhatsApp</a>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- BOTÓN FLOTANTE -->
-<a href="https://wa.me/573053399795" class="whatsapp-float" target="_blank">
-  💬
-</a>
-
-<style>
-
-.acustica-section {
-  background: #0b0b0b;
-  color: white;
-  padding: 80px 20px;
-  font-family: Arial, sans-serif;
-}
-
-.container {
-  max-width: 1100px;
-  margin: auto;
-}
-
-h2 {
-  text-align: center;
-  font-size: 40px;
-}
-
-.subtitle {
-  text-align: center;
-  color: #aaa;
-  margin-bottom: 50px;
-}
-
-/* GALERIA */
-.galeria {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 20px;
-}
-
-.card {
-  background: #111;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-5px) scale(1.02);
-}
-
-.card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.card h3 {
-  padding: 10px;
-}
-
-.card p {
-  padding: 0 10px 20px;
-  color: #ccc;
-}
-
-/* TABLA */
-.tabla {
-  margin-top: 60px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 15px;
-  border-bottom: 1px solid #333;
-}
-
-th {
-  color: #2ecc71;
-}
-
-/* CALCULADORA */
-.calc-box {
-  margin-top: 60px;
-  background: #111;
-  padding: 30px;
-  border-radius: 12px;
-}
-
-.calc-box input,
-.calc-box select {
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-  background: #1a1a1a;
-  border: none;
-  color: white;
-  border-radius: 8px;
-}
-
-.calc-box button {
-  margin-top: 20px;
-  padding: 15px;
-  width: 100%;
-  background: #2ecc71;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-#resultado {
-  margin-top: 20px;
-  color: #25D366;
-  font-weight: bold;
-}
-
-/* CTA */
-.cta {
-  margin-top: 60px;
-  text-align: center;
-}
-
-.cta a {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 15px 30px;
-  background: #25D366;
-  color: white;
-  text-decoration: none;
-  border-radius: 10px;
-}
-
-/* BOTÓN FLOTANTE */
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #25D366;
-  color: white;
-  font-size: 28px;
-  padding: 15px 18px;
-  border-radius: 50%;
-  text-decoration: none;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-</style>
-
-<script>
-
-function actualizarNivel(valor){
-  document.getElementById("valorNivel").innerText = valor;
-}
-
-function calcular(){
-  let nivel = document.getElementById("nivel").value;
-  let reduccion = document.getElementById("tipo").value;
-
-  let interior = nivel - reduccion;
-
-  document.getElementById("resultado").innerHTML =
-    "Nivel interior estimado: <strong>" + interior + " dB</strong>";
-}
-
-</script>
 
 </section>
 
@@ -920,15 +740,3 @@ setTimeout(update,20);
 
 }
 
-}
-
-update();
-
-});
-
-
-
-}
-
-</body>
-</html>
