@@ -275,6 +275,70 @@ color:#8c8c8c
 <strong>TRIASIX CAPITAL GROUP</strong>
 </a>
 
+  <!-- BOTÓN INTELIGENTE PRO -->
+<style>
+#btnRuidoPro{
+position:fixed;
+bottom:30px;
+right:25px;
+background:linear-gradient(135deg,#00ffa6,#25D366);
+color:#000;
+padding:16px 22px;
+border-radius:40px;
+font-weight:700;
+text-decoration:none;
+font-size:14px;
+box-shadow:0 10px 30px rgba(0,0,0,.6);
+z-index:9999;
+transition:.4s;
+opacity:0;
+transform:translateY(50px);
+}
+
+/* HOVER */
+#btnRuidoPro:hover{
+transform:scale(1.1);
+box-shadow:0 15px 40px rgba(0,0,0,.8);
+}
+
+/* APARECE */
+#btnRuidoPro.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* EFECTO PULSO */
+#btnRuidoPro::after{
+content:"";
+position:absolute;
+inset:0;
+border-radius:40px;
+background:rgba(0,255,166,0.4);
+animation:pulse 2s infinite;
+z-index:-1;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);opacity:.6}
+100%{transform:scale(1.6);opacity:0}
+}
+</style>
+
+<a href="#calculadora" id="btnRuidoPro">
+🔊 Medir ruido ahora
+</a>
+
+<script>
+const boton = document.getElementById("btnRuidoPro");
+
+window.addEventListener("scroll", () => {
+if(window.scrollY > 300){
+boton.classList.add("show");
+}else{
+boton.classList.remove("show");
+}
+});
+</script>
 <div>
 <a href="#servicios">Servicios</a>
 <a href="#catalogo">Catálogo</a>
