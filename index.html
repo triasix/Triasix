@@ -291,17 +291,136 @@ color:#8c8c8c
 <a class="btn" href="https://wa.me/573053399795">Cotizar Proyecto</a>
 </section>
 
-<!-- EXPERIENCIA -->
+<!-- EXPERIENCIA COMPLETA -->
+
 <section id="experiencia">
+
 <h2 class="section-title">Más de 12 años construyendo proyectos</h2>
 
 <div class="stats">
-<div class="stat"><h3 class="counter" data-target="12">0</h3><p>Años de Experiencia</p></div>
-<div class="stat"><h3 class="counter" data-target="50">0</h3><p>Proyectos Realizados</p></div>
-<div class="stat"><h3 class="counter" data-target="45">0</h3><p>Clientes Satisfechos</p></div>
-<div class="stat"><h3 class="counter" data-target="150">0</h3><p>Soporte y Atención</p></div>
+
+<div class="stat">
+<h3 class="counter" data-target="12">0</h3>
+<p>Años de Experiencia</p>
 </div>
+
+<div class="stat">
+<h3 class="counter" data-target="50">0</h3>
+<p>Proyectos Realizados</p>
+</div>
+
+<div class="stat">
+<h3 class="counter" data-target="45">0</h3>
+<p>Clientes Satisfechos</p>
+</div>
+
+<div class="stat">
+<h3 class="counter" data-target="150">0</h3>
+<p>Soporte y Atención</p>
+</div>
+
+</div>
+
 </section>
+
+<style>
+
+/* SECCION */
+#experiencia{
+  padding:60px 20px;
+  background:#0b0b0b;
+  color:white;
+  text-align:center;
+}
+
+/* TITULO */
+.section-title{
+  font-size:28px;
+  margin-bottom:40px;
+}
+
+/* GRID */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+}
+
+/* CARD */
+.stat{
+  background:#111;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 0 15px rgba(0,0,0,0.5);
+  transition:0.3s;
+}
+
+.stat:hover{
+  transform:translateY(-5px);
+}
+
+/* NUMERO */
+.counter{
+  font-size:40px;
+  color:#00e676;
+  margin:0;
+}
+
+/* TEXTO */
+.stat p{
+  margin-top:10px;
+  color:#ccc;
+}
+
+</style>
+
+<script>
+
+/* CONTADOR PRO */
+const counters = document.querySelectorAll('.counter');
+
+let activado = false;
+
+function iniciarContador(){
+
+  if(activado) return;
+  activado = true;
+
+  counters.forEach(counter => {
+
+    const target = +counter.getAttribute('data-target');
+    let count = 0;
+
+    const velocidad = target / 80;
+
+    const update = () => {
+
+      count += velocidad;
+
+      if(count < target){
+        counter.innerText = Math.ceil(count);
+        requestAnimationFrame(update);
+      } else {
+        counter.innerText = target;
+      }
+
+    };
+
+    update();
+  });
+}
+
+/* ACTIVAR CUANDO SE VEA */
+const observer = new IntersectionObserver(entries => {
+  if(entries[0].isIntersecting){
+    iniciarContador();
+  }
+});
+
+observer.observe(document.querySelector("#experiencia"));
+
+</script>
+
 
 <!DOCTYPE html>
 
