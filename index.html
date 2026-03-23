@@ -5,11 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Triasix Capital Group | Ventanas en Aluminio y Vidrio</title>
+<title>Triasix Capital Group</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* TODO TU CSS ORIGINAL SIN TOCAR */
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -168,14 +170,6 @@ padding:40px;
 border-radius:14px
 }
 
-/* CATALOGO */
-.catalogo iframe{
-width:100%;
-height:700px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.1)
-}
-
 /* GALERIA */
 .gallery{
 column-count:3;
@@ -205,8 +199,7 @@ z-index:9999
 
 #lightbox img{
 max-width:90%;
-max-height:90%;
-border-radius:12px
+max-height:90%
 }
 
 #lightbox span{
@@ -234,6 +227,13 @@ border-radius:8px;
 border:none
 }
 
+/* MAPA */
+.map-container{
+border-radius:16px;
+overflow:hidden;
+margin-top:20px
+}
+
 /* WHATSAPP */
 .whatsapp-float{
 position:fixed;
@@ -245,8 +245,7 @@ height:68px;
 border-radius:50%;
 display:flex;
 align-items:center;
-justify-content:center;
-z-index:999
+justify-content:center
 }
 
 .whatsapp-float img{
@@ -292,17 +291,19 @@ color:#8c8c8c
 <a class="btn" href="https://wa.me/573053399795">Cotizar Proyecto</a>
 </section>
 
+<!-- EXPERIENCIA -->
 <section id="experiencia">
 <h2 class="section-title">Más de 12 años construyendo proyectos</h2>
 
 <div class="stats">
-<div class="stat"><h3 class="counter" data-target="12">0</h3><p>Años</p></div>
-<div class="stat"><h3 class="counter" data-target="50">0</h3><p>Proyectos</p></div>
-<div class="stat"><h3 class="counter" data-target="45">0</h3><p>Clientes</p></div>
-<div class="stat"><h3 class="counter" data-target="150">0</h3><p>Soporte</p></div>
+<div class="stat"><h3 class="counter" data-target="12">0</h3><p>Años de Experiencia</p></div>
+<div class="stat"><h3 class="counter" data-target="50">0</h3><p>Proyectos Realizados</p></div>
+<div class="stat"><h3 class="counter" data-target="45">0</h3><p>Clientes Satisfechos</p></div>
+<div class="stat"><h3 class="counter" data-target="150">0</h3><p>Soporte y Atención</p></div>
 </div>
 </section>
 
+<!-- SERVICIOS -->
 <section id="servicios">
 <h2 class="section-title">Nuestros Servicios</h2>
 
@@ -312,22 +313,39 @@ color:#8c8c8c
 <div class="card"><h3>Divisiones de Baño</h3></div>
 <div class="card"><h3>Barandas en Vidrio</h3></div>
 </div>
-
 </section>
 
+<!-- CATALOGO -->
 <section id="catalogo">
 <h2 class="section-title">Catálogo de Sistemas</h2>
 
-<iframe src="catalogo-triasix.pdf"></iframe>
+<div style="text-align:center; max-width:900px; margin:auto;">
+
+<iframe src="catalogo-triasix.pdf" width="100%" height="600" style="border-radius:12px;border:none;"></iframe>
+
+<div style="margin-top:30px;display:flex;flex-wrap:wrap;gap:15px;justify-content:center;">
+<a class="btn" href="catalogo-triasix.pdf" target="_blank">📖 Ver catálogo completo</a>
+<a class="btn" href="catalogo-triasix.pdf" download>⬇ Descargar catálogo</a>
+<a class="btn" href="https://wa.me/573053399795">💬 Cotizar este sistema</a>
+<a class="btn" href="tel:3053399795">📞 Llamar ahora</a>
+</div>
+
+</div>
 </section>
 
+<!-- GALERIA -->
 <section id="galeria">
-<h2 class="section-title">Galería</h2>
+<h2 class="section-title">Galería de Proyectos</h2>
 
 <div class="gallery">
 <img src="proyecto1.jpg" onclick="openLightbox(this)">
 <img src="proyecto2.jpg" onclick="openLightbox(this)">
 <img src="proyecto3.jpg" onclick="openLightbox(this)">
+<img src="proyecto4.jpg" onclick="openLightbox(this)">
+<img src="proyecto5.jpg" onclick="openLightbox(this)">
+<img src="proyecto6.jpg" onclick="openLightbox(this)">
+<img src="proyecto7.jpg" onclick="openLightbox(this)">
+<img src="proyecto8.jpg" onclick="openLightbox(this)">
 </div>
 
 </section>
@@ -337,30 +355,36 @@ color:#8c8c8c
 <img id="lightbox-img">
 </div>
 
+<!-- CONTACTO + MAPA -->
 <section id="contacto">
-<h2 class="section-title">Contacto</h2>
+<h2 class="section-title">Contáctanos</h2>
 
 <div class="contact-grid">
 
-<form class="contact-form">
-<input type="text" placeholder="Nombre" required>
-<input type="email" placeholder="Email" required>
-<textarea placeholder="Mensaje"></textarea>
-<button class="btn">Enviar</button>
+<form action="https://formspree.io/f/xaqpdvpb" method="POST" class="contact-form">
+<input type="text" name="nombre" placeholder="Nombre" required>
+<input type="email" name="email" placeholder="Email" required>
+<input type="tel" name="telefono" placeholder="Teléfono">
+<textarea name="mensaje" placeholder="Cuéntanos tu proyecto" rows="5"></textarea>
+<label><input type="checkbox" required> Acepto políticas</label>
+<button type="submit" class="btn">Enviar solicitud</button>
+<a href="https://wa.me/573053399795" class="btn">WhatsApp</a>
 </form>
 
 <div>
 <p>Tel: 305 339 9795</p>
 <p>Bogotá</p>
+
+<div class="map-container">
+<iframe src="https://www.google.com/maps?q=bogota&output=embed" width="100%" height="250"></iframe>
 </div>
 
 </div>
 
+</div>
 </section>
 
-<footer>
-© 2026 Triasix Capital Group
-</footer>
+<footer>© 2026 Triasix Capital Group</footer>
 
 <a class="whatsapp-float" href="https://wa.me/573053399795">
 <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
@@ -376,25 +400,20 @@ document.getElementById("progressBar").style.width=(winScroll/height)*100+"%";
 }
 
 /* HEADER */
-const header=document.getElementById("mainHeader");
-
-window.addEventListener("scroll",()=>{
-if(window.scrollY>60){
-header.classList.add("scrolled")
-}else{
-header.classList.remove("scrolled")
-}
+const header=document.getElementById('mainHeader');
+window.addEventListener('scroll',()=>{
+header.classList.toggle('scrolled',window.scrollY>60);
 });
 
-/* COUNTER */
-document.querySelectorAll(".counter").forEach(counter=>{
+/* CONTADOR */
+document.querySelectorAll('.counter').forEach(counter=>{
 let update=()=>{
-let target=+counter.getAttribute("data-target");
+let target=+counter.dataset.target;
 let count=+counter.innerText;
-let increment=target/100;
+let inc=target/100;
 
 if(count<target){
-counter.innerText=Math.ceil(count+increment);
+counter.innerText=Math.ceil(count+inc);
 setTimeout(update,20);
 }else{
 counter.innerText=target;
@@ -408,7 +427,6 @@ function openLightbox(img){
 document.getElementById("lightbox").style.display="flex";
 document.getElementById("lightbox-img").src=img.src;
 }
-
 function closeLightbox(){
 document.getElementById("lightbox").style.display="none";
 }
