@@ -1130,7 +1130,127 @@ document.getElementById("lightbox").style.display="none";
 
 </script>
 
-<!-- MEDIDOR PRO + RESULTADO 10 SEGUNDOS -->
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Triasix Web</title>
+
+<style>
+html{scroll-behavior:smooth;}
+
+body{
+font-family:Arial;
+background:#0b0b0b;
+color:white;
+margin:0;
+}
+
+/* EXPERIENCIA */
+#experiencia{
+padding:60px 20px;
+text-align:center;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+}
+
+.stat{
+background:#111;
+padding:25px;
+border-radius:15px;
+text-decoration:none;
+color:white;
+display:block;
+cursor:pointer;
+}
+
+.counter{
+font-size:40px;
+color:#00e676;
+}
+
+/* MEDIDOR */
+.sound-meter-pro{
+background:#111;
+padding:30px;
+border-radius:16px;
+max-width:600px;
+margin:60px auto;
+text-align:center;
+}
+
+#bars{
+display:flex;
+align-items:flex-end;
+justify-content:space-between;
+height:120px;
+}
+
+.bar{
+width:8px;
+background:linear-gradient(to top,#00ffcc,#ff0055);
+}
+
+input,button{
+width:100%;
+padding:10px;
+margin:5px 0;
+border:none;
+}
+
+#whatsappBtn{
+display:block;
+padding:10px;
+background:#25D366;
+color:white;
+text-decoration:none;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- EXPERIENCIA -->
+
+<section id="experiencia">
+
+<h2>Más de 12 años construyendo proyectos</h2>
+
+<div class="stats">
+
+<a href="#medidor" class="stat">
+<h3 class="counter" data-target="12">0</h3>
+<p>Años de Experiencia</p>
+</a>
+
+<a href="#medidor" class="stat">
+<h3 class="counter" data-target="50">0</h3>
+<p>Proyectos Realizados</p>
+</a>
+
+<a href="#medidor" class="stat">
+<h3 class="counter" data-target="45">0</h3>
+<p>Clientes Satisfechos</p>
+</a>
+
+<a href="#medidor" class="stat">
+<h3 class="counter" data-target="150">0</h3>
+<p>Soporte y Atención</p>
+</a>
+
+</div>
+</section>
+
+<!-- MEDIDOR (AQUI ESTA LA CLAVE 🔥) -->
+
+<section id="medidor">
+
 <div class="sound-meter-pro">
 
 <h3>Medición Profesional (10s)</h3>
@@ -1146,82 +1266,49 @@ document.getElementById("lightbox").style.display="none";
 
 <div id="cotizacion"></div>
 
-<button onclick="iniciarAudio()">Iniciar Medición</button>
-<button onclick="modoDemo()">Modo Demo</button>
+<button onclick="iniciarAudio()">Iniciar Medición</button> <button onclick="modoDemo()">Modo Demo</button>
 
 <a id="whatsappBtn" target="_blank">Enviar a WhatsApp</a>
 
 </div>
 
-<style>
-.sound-meter-pro{
-background:#111;
-padding:30px;
-border-radius:16px;
-max-width:600px;
-margin:auto;
-text-align:center;
-color:#fff;
-}
-
-#bars{
-display:flex;
-align-items:flex-end;
-justify-content:space-between;
-height:120px;
-margin:20px 0;
-}
-
-.bar{
-width:8px;
-background:linear-gradient(to top,#00ffcc,#ff0055);
-border-radius:4px;
-transition:height 0.1s;
-}
-
-input{
-width:100%;
-padding:10px;
-margin:5px 0;
-background:#222;
-color:#fff;
-border:none;
-}
-
-button{
-width:100%;
-padding:10px;
-margin-top:5px;
-background:#00c2ff;
-border:none;
-cursor:pointer;
-}
-
-#whatsappBtn{
-display:block;
-margin-top:10px;
-padding:10px;
-background:#25D366;
-color:#fff;
-text-decoration:none;
-}
-</style>
+</section>
 
 <script>
 
-let audioContext, analyser, dataArray;
-let bars = [];
-let mediciones = [];
-let midiendo = false;
+/* CONTADOR */
+const counters = document.querySelectorAll('.counter');
 
-// CREAR BARRAS
+const observer = new IntersectionObserver(entries => {
+if(entries[0].isIntersecting){
+counters.forEach(counter=>{
+let target = +counter.dataset.target;
+let count = 0;
+let inc = target/80;
+
+function update(){
+count+=inc;
+if(count<target){
+counter.innerText=Math.ceil(count);
+requestAnimationFrame(update);
+}else{
+counter.innerText=target;
+}
+}
+update();
+});
+}
+});
+
+observer.observe(document.querySelector("#experiencia"));
+
+/* MEDIDOR */
+let bars=[],mediciones=[],midiendo=false;
+
 function crearBarras(){
-const cont = document.getElementById("bars");
-cont.innerHTML = "";
-bars = [];
-
+const cont=document.getElementById("bars");
 for(let i=0;i<40;i++){
-let bar = document.createElement("div");
+let bar=document.createElement("div");
 bar.classList.add("bar");
 bar.style.height="5px";
 cont.appendChild(bar);
@@ -1230,139 +1317,94 @@ bars.push(bar);
 }
 crearBarras();
 
-// INICIAR MICROFONO + MEDICION
 async function iniciarAudio(){
 try{
-
-const stream = await navigator.mediaDevices.getUserMedia({audio:true});
-
-audioContext = new AudioContext();
-analyser = audioContext.createAnalyser();
-
-const source = audioContext.createMediaStreamSource(stream);
+const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+let ctx=new AudioContext();
+let analyser=ctx.createAnalyser();
+let source=ctx.createMediaStreamSource(stream);
 source.connect(analyser);
 
-analyser.fftSize = 128;
-dataArray = new Uint8Array(analyser.frequencyBinCount);
+let data=new Uint8Array(analyser.frequencyBinCount);
 
-mediciones = [];
-midiendo = true;
+mediciones=[];
+midiendo=true;
 
-document.getElementById("estado").innerText="Midiendo 10 segundos...";
-
-loop();
-
-// ⏱ DETENER A LOS 10s
-setTimeout(finalizarMedicion,10000);
-
-}catch(e){
-document.getElementById("estado").innerText="ERROR micrófono / HTTPS";
-}
-}
-
-// LOOP
 function loop(){
+if(!midiendo)return;
+analyser.getByteFrequencyData(data);
 
-if(!midiendo) return;
-
-analyser.getByteFrequencyData(dataArray);
-
-// ANIMACION
-for(let i=0;i<bars.length;i++){
-bars[i].style.height = (dataArray[i]*1.5)+"px";
+let sum=0;
+for(let i=0;i<data.length;i++){
+sum+=data[i];
+bars[i].style.height=data[i]+"px";
 }
 
-// PROMEDIO INSTANTANEO
-let sum = 0;
-for(let i=0;i<dataArray.length;i++){
-sum += dataArray[i];
-}
-
-let db = Math.round(sum / dataArray.length);
-
-// GUARDAR MEDICION
+let db=Math.round(sum/data.length);
 mediciones.push(db);
 
 document.getElementById("db").innerText=db+" dB";
 
 requestAnimationFrame(loop);
 }
+loop();
 
-// FINALIZAR
-function finalizarMedicion(){
+setTimeout(()=>{
+midiendo=false;
+let avg=Math.round(mediciones.reduce((a,b)=>a+b)/mediciones.length);
+resultado(avg);
+},10000);
 
-midiendo = false;
-
-// PROMEDIO FINAL
-let total = mediciones.reduce((a,b)=>a+b,0);
-let promedio = Math.round(total / mediciones.length);
-
-mostrarResultado(promedio);
-
-document.getElementById("estado").innerText="Medición finalizada";
+}catch(e){
+alert("Activa HTTPS o permisos");
+}
 }
 
-// DEMO
 function modoDemo(){
+mediciones=[];
+midiendo=true;
 
-mediciones = [];
-midiendo = true;
-
-document.getElementById("estado").innerText="Demo 10 segundos...";
-
-let intervalo = setInterval(()=>{
-
-for(let i=0;i<bars.length;i++){
-bars[i].style.height = (Math.random()*120)+"px";
-}
-
-let db = Math.floor(Math.random()*100);
+let i=setInterval(()=>{
+let db=Math.floor(Math.random()*100);
 mediciones.push(db);
-
 document.getElementById("db").innerText=db+" dB";
-
+bars.forEach(b=>b.style.height=Math.random()*120+"px");
 },200);
 
 setTimeout(()=>{
-clearInterval(intervalo);
-finalizarMedicion();
+clearInterval(i);
+midiendo=false;
+let avg=Math.round(mediciones.reduce((a,b)=>a+b)/mediciones.length);
+resultado(avg);
 },10000);
 }
 
-// RESULTADO FINAL
-function mostrarResultado(db){
-
-document.getElementById("db").innerText=db+" dB";
-
-// NIVEL
-let nivel="", precio=0;
+function resultado(db){
+let nivel="",precio=0;
 
 if(db<40){nivel="Bajo";precio=220000;}
 else if(db<70){nivel="Medio";precio=320000;}
 else{nivel="Alto";precio=450000;}
 
-document.getElementById("nivel").innerText="Nivel final: "+nivel;
+document.getElementById("nivel").innerText="Nivel: "+nivel;
 
-// MEDIDAS
-let a = parseFloat(document.getElementById("ancho").value);
-let b = parseFloat(document.getElementById("alto").value);
+let a=document.getElementById("ancho").value;
+let b=document.getElementById("alto").value;
 
-let texto = "RESULTADO FINAL → "+db+" dB ("+nivel+")";
+let texto="Resultado "+db+" dB ("+nivel+")";
 
-// COTIZACION
-if(a>0 && b>0){
-let total = a*b*precio;
-
-document.getElementById("cotizacion").innerText =
-"Precio estimado: $" + total.toLocaleString();
-
-texto += " | Medidas: "+a+"x"+b+" | Precio: $"+total.toLocaleString();
+if(a && b){
+let total=a*b*precio;
+document.getElementById("cotizacion").innerText="Precio: $"+total.toLocaleString();
+texto+=" Precio: "+total;
 }
 
-// WHATSAPP
-document.getElementById("whatsappBtn").href =
+document.getElementById("whatsappBtn").href=
 "https://wa.me/573053399795?text="+encodeURIComponent(texto);
-
 }
 
 </script>
+
+</body>
+</html>
+
