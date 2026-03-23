@@ -664,13 +664,13 @@ document.getElementById("lightbox").style.display="none";
 
 </script>
 
-  ```html
-<!-- MEDIDOR PRO CORREGIDO -->
+<!-- MEDIDOR PRO + GRAFICO DE BARRAS -->
 <div class="sound-meter-pro">
 
 <h3>Medidor + Cotización</h3>
 
-<div class="meter"><div id="barra"></div></div>
+<!-- BARRAS -->
+<div id="bars"></div>
 
 <div id="db">0 dB</div>
 <div id="nivel">Nivel: Esperando...</div>
@@ -689,17 +689,82 @@ document.getElementById("lightbox").style.display="none";
 </div>
 
 <style>
-.sound-meter-pro{background:#111;padding:30px;border-radius:16px;max-width:600px;margin:auto;text-align:center;}
-.meter{height:20px;background:#222;border-radius:10px;margin:10px 0;}
-#barra{height:100%;width:0%;background:linear-gradient(90deg,#00ffcc,#ff0055);}
-input{width:100%;padding:10px;margin:5px 0;background:#222;color:#fff;border:none;}
-button{width:100%;padding:10px;margin-top:5px;background:#00c2ff;border:none;}
-#whatsappBtn{display:block;margin-top:10px;padding:10px;background:#25D366;color:#fff;text-decoration:none;}
+.sound-meter-pro{
+background:#111;
+padding:30px;
+border-radius:16px;
+max-width:600px;
+margin:auto;
+text-align:center;
+color:#fff;
+}
+
+/* CONTENEDOR BARRAS */
+#bars{
+display:flex;
+align-items:flex-end;
+justify-content:space-between;
+height:120px;
+margin:20px 0;
+}
+
+/* CADA BARRA */
+.bar{
+width:8px;
+background:linear-gradient(to top,#00ffcc,#ff0055);
+border-radius:4px;
+transition:height 0.1s;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:5px 0;
+background:#222;
+color:#fff;
+border:none;
+}
+
+button{
+width:100%;
+padding:10px;
+margin-top:5px;
+background:#00c2ff;
+border:none;
+cursor:pointer;
+}
+
+#whatsappBtn{
+display:block;
+margin-top:10px;
+padding:10px;
+background:#25D366;
+color:#fff;
+text-decoration:none;
+}
 </style>
 
 <script>
 
 let audioContext, analyser, dataArray;
+let bars = [];
+
+// 🔊 CREAR BARRAS
+function crearBarras(){
+const cont = document.getElementById("bars");
+cont.innerHTML = "";
+bars = [];
+
+for(let i=0;i<40;i++){
+let bar = document.createElement("div");
+bar.classList.add("bar");
+bar.style.height="5px";
+cont.appendChild(bar);
+bars.push(bar);
+}
+}
+
+crearBarras();
 
 // 🔊 MICROFONO
 async function iniciarAudio(){
@@ -713,7 +778,7 @@ analyser = audioContext.createAnalyser();
 const source = audioContext.createMediaStreamSource(stream);
 source.connect(analyser);
 
-analyser.fftSize = 512;
+analyser.fftSize = 128;
 dataArray = new Uint8Array(analyser.frequencyBinCount);
 
 document.getElementById("estado").innerText="Micrófono activo";
@@ -725,11 +790,18 @@ document.getElementById("estado").innerText="ERROR: usa HTTPS o permite micrófo
 }
 }
 
-// 🔁 LOOP
+// 🔁 LOOP PRINCIPAL
 function loop(){
 
 analyser.getByteFrequencyData(dataArray);
 
+// ANIMAR BARRAS
+for(let i=0;i<bars.length;i++){
+let value = dataArray[i];
+bars[i].style.height = (value*1.5)+"px";
+}
+
+// CALCULAR DB PROMEDIO
 let sum = 0;
 for(let i=0;i<dataArray.length;i++){
 sum += dataArray[i];
@@ -745,16 +817,21 @@ requestAnimationFrame(loop);
 // 🎮 DEMO
 function modoDemo(){
 setInterval(()=>{
-let db = Math.floor(Math.random()*100);
-actualizar(db);
-},500);
+
+for(let i=0;i<bars.length;i++){
+bars[i].style.height = (Math.random()*120)+"px";
 }
 
-// 💰 CALCULO
+let db = Math.floor(Math.random()*100);
+actualizar(db);
+
+},200);
+}
+
+// 💰 CALCULO + UI
 function actualizar(db){
 
 document.getElementById("db").innerText=db+" dB";
-document.getElementById("barra").style.width=db+"%";
 
 // NIVEL
 let nivel="", precio=0;
@@ -781,11 +858,10 @@ document.getElementById("cotizacion").innerText =
 texto += " | Medidas: "+a+"x"+b+" | Precio: $"+total.toLocaleString();
 }
 
-// WHATSAPP SIEMPRE ACTIVO
+// WHATSAPP
 document.getElementById("whatsappBtn").href =
 "https://wa.me/573000000000?text="+encodeURIComponent(texto);
 
 }
 
 </script>
-```
