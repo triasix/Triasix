@@ -608,157 +608,162 @@ document.getElementById("resultado").innerHTML =
 
 </div>
 ```html id="medidorprofinal"
-```html
-<!-- MEDIDOR PRO + DIAGNOSTICO INGENIERO (MOVIL READY) -->
-<div class="sound-pro">
+```javascript
+let audioContext, analyser, source;
+let dataArray;
+let animacion;
 
-<h3>Diagnóstico Acústico Inteligente</h3>
-
-<div class="meter"><div id="barra"></div></div>
-
-<div id="db">0 dB</div>
-<div id="nivel">Nivel: -</div>
-<div id="diagnostico">Diagnóstico: esperando medición</div>
-
-<input type="number" id="ancho" placeholder="Ancho (m)">
-<input type="number" id="alto" placeholder="Alto (m)">
-
-<div id="precio"></div>
-
-<button onclick="activarAudio()">Activar Medición</button>
-<button onclick="modoDemo()">Modo Demo</button>
-
-<a id="wsp" target="_blank">Enviar diagnóstico</a>
-
-</div>
-
-<style>
-.sound-pro{background:#111;padding:25px;border-radius:16px;text-align:center;max-width:600px;margin:auto}
-.meter{height:20px;background:#222;border-radius:10px;margin:10px 0}
-#barra{height:100%;width:0;background:linear-gradient(90deg,#00ffcc,#ff0055)}
-input{width:100%;padding:10px;margin:5px 0;background:#222;color:#fff;border:none}
-button{width:100%;padding:12px;margin-top:5px;background:#00c2ff;border:none}
-#wsp{display:block;margin-top:10px;background:#25D366;padding:10px;color:#fff;text-decoration:none}
-#diagnostico{margin-top:10px;color:#ccc}
-</style>
-
-<script>
-
-let ctx, analyser, data;
-
-// ACTIVAR AUDIO (COMPATIBLE MOVIL)
-async function activarAudio(){
+// ACTIVAR MICROFONO
+async function iniciarAudio(){
 
 try{
 
-ctx = new (window.AudioContext || window.webkitAudioContext)();
-
-// 🔥 CLAVE PARA IPHONE
-if(ctx.state === "suspended"){
-await ctx.resume();
+// 🔥 SI YA EXISTE, REINICIAR
+if(audioContext){
+cancelAnimationFrame(animacion);
+audioContext.close();
 }
 
-const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-analyser = ctx.createAnalyser();
-const source = ctx.createMediaStreamSource(stream);
+// 🔥 CLAVE PARA MOVILES
+if(audioContext.state === "suspended"){
+await audioContext.resume();
+}
+
+const stream = await navigator.mediaDevices.getUserMedia({
+audio:{
+echoCancellation:true,
+noiseSuppression:true,
+autoGainControl:true
+}
+});
+
+analyser = audioContext.createAnalyser();
+source = audioContext.createMediaStreamSource(stream);
 
 source.connect(analyser);
 
 analyser.fftSize = 512;
-data = new Uint8Array(analyser.frequencyBinCount);
+dataArray = new Uint8Array(analyser.frequencyBinCount);
 
-medir();
+document.getElementById("estado").innerText = "Micrófono activo";
+
+loop();
 
 }catch(e){
-alert("Micrófono bloqueado. Usa modo demo o activa permisos.");
+document.getElementById("estado").innerText =
+"Error: revisa permisos o usa HTTPS";
+console.error(e);
 }
 
 }
 
-// LOOP
-function medir(){
+// LOOP ESTABLE
+function loop(){
 
-analyser.getByteFrequencyData(data);
+if(!analyser) return;
 
-let avg = data.reduce((a,b)=>a+b,0)/data.length;
+analyser.getByteFrequencyData(dataArray);
+
+// 🔥 MEJOR CALCULO DE dB
+let sum = 0;
+for(let i=0;i<dataArray.length;i++){
+sum += dataArray[i];
+}
+
+let avg = sum / dataArray.length;
 let db = Math.round(avg);
 
-procesar(db);
+actualizarUI(db);
 
-requestAnimationFrame(medir);
+animacion = requestAnimationFrame(loop);
 }
 
-// DEMO
+// DEMO (SEGURA)
 function modoDemo(){
-setInterval(()=>{
-let db = Math.floor(Math.random()*90);
-procesar(db);
-},600);
+
+cancelAnimationFrame(animacion);
+
+function sim(){
+let db = Math.floor(Math.random()*90)+10;
+actualizarUI(db);
+animacion = requestAnimationFrame(sim);
 }
 
-// PROCESO INGENIERO
-function procesar(db){
-
-dbText.innerText = db+" dB";
-barra.style.width = db+"%";
-
-// CLASIFICACION TECNICA
-let nivel, sistema, descripcion, precioM2;
-
-if(db < 35){
-nivel="Ambiente silencioso";
-sistema="No requiere intervención";
-descripcion="Condiciones acústicas óptimas";
-precioM2=0;
+sim();
 }
-else if(db < 55){
-nivel="Ruido moderado";
-sistema="Vidrio laminado 3+3";
-descripcion="Afectación leve, mejora recomendada";
-precioM2=220000;
+
+// ACTUALIZAR UI (NO TOCAR SI YA FUNCIONA)
+function actualizarUI(db){
+
+document.getElementById("db").innerText = db + " dB";
+document.getElementById("barra").style.width = db + "%";
+
+// NIVEL
+let nivelTexto = "", precioM2 = 0;
+
+if(db < 40){
+nivelTexto = "Bajo";
+precioM2 = 220000;
 }
-else if(db < 75){
-nivel="Ruido alto";
-sistema="Vidrio 4+4 hermético";
-descripcion="Afectación significativa";
-precioM2=320000;
+else if(db < 70){
+nivelTexto = "Medio";
+precioM2 = 320000;
 }
 else{
-nivel="Ruido crítico 🚨";
-sistema="Doble cámara acústica";
-descripcion="Intervención obligatoria";
-precioM2=450000;
+nivelTexto = "Alto 🚨";
+precioM2 = 450000;
 }
 
-nivelEl.innerText = nivel;
-
-document.getElementById("diagnostico").innerHTML =
-"Sistema recomendado: "+sistema+"<br>"+descripcion;
+let nivelEl = document.getElementById("nivel");
+nivelEl.innerText = "Nivel: " + nivelTexto;
+nivelEl.style.color = db > 70 ? "#ff0055" : "#ccc";
 
 // CALCULO
-let a = ancho.value;
-let b = alto.value;
+let a = parseFloat(document.getElementById("ancho").value);
+let b = parseFloat(document.getElementById("alto").value);
 
-let texto = `Diagnóstico acústico:
-${db} dB
-${nivel}
-Sistema: ${sistema}`;
+if(a > 0 && b > 0){
+let total = a * b * precioM2;
 
-if(a && b && precioM2>0){
-let total = a*b*precioM2;
+document.getElementById("cotizacion").innerHTML =
+"Precio: $" + total.toLocaleString();
 
-precio.innerHTML = "Inversión estimada: $" + total.toLocaleString();
+let mensaje = `Ruido: ${db} dB
+Nivel: ${nivelTexto}
+Medidas: ${a} x ${b}
+Precio: $${total.toLocaleString()}`;
 
-texto += `\nMedidas: ${a}x${b}\nPrecio: $${total.toLocaleString()}`;
+document.getElementById("whatsappBtn").href =
+"https://wa.me/573000000000?text=" + encodeURIComponent(mensaje);
 }
 
-// WHATSAPP
-wsp.href="https://wa.me/573000000000?text="+encodeURIComponent(texto);
+// GRAFICA (FIX CLAVE)
+let canvas = document.getElementById("grafica");
+if(!canvas) return;
+
+let ctx = canvas.getContext("2d");
+
+if(!window.historial) window.historial = [];
+
+historial.push(db);
+if(historial.length > 50) historial.shift();
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.beginPath();
+
+historial.forEach((v,i)=>{
+let x = (i / 50) * canvas.width;
+let y = canvas.height - (v * 1.2);
+ctx.lineTo(x,y);
+});
+
+ctx.strokeStyle = "#00c2ff";
+ctx.lineWidth = 2;
+ctx.stroke();
 
 }
-
-</script>
 ```
 
 ```
