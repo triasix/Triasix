@@ -232,6 +232,12 @@ padding:45px;
 color:#8c8c8c
 }
 
+</div>
+
+</section>
+</head>
+
+<body>
 
 <div id="progressBar"></div>
 
@@ -262,94 +268,6 @@ color:#8c8c8c
 <a class="btn" href="https://wa.me/573053399795">Cotizar Proyecto</a>
 
 </section>
-  <div class="calc-box">
-
-  <h2>Calcula tu Nivel de Ruido</h2>
-
-  <label>Tipo de ruido:</label>
-  <select id="tipoRuido">
-    <option value="50">Tráfico leve</option>
-    <option value="60" selected>Tráfico moderado</option>
-    <option value="80">Tráfico alto</option>
-  </select>
-
-  <label>Nivel estimado (dB): <span id="valorNivel">60</span> dB</label>
-  <input type="range" id="nivel" min="30" max="100" value="60" oninput="actualizarNivel(this.value)">
-
-  <button onclick="calcularRuido()">Calcular aislamiento</button>
-
-  <div id="resultado"></div>
-
-</div>
-
-<script>
-function actualizarNivel(valor){
-  document.getElementById("valorNivel").innerText = valor;
-}
-
-function calcularRuido(){
-  let nivel = document.getElementById("nivel").value;
-  let reduccion = 30; // promedio vidrio acústico
-
-  let resultadoFinal = nivel - reduccion;
-
-  let mensaje = `
-    <p><strong>Nivel exterior:</strong> ${nivel} dB</p>
-    <p><strong>Nivel interior estimado:</strong> ${resultadoFinal} dB</p>
-  `;
-
-  document.getElementById("resultado").innerHTML = mensaje;
-}
-</script>
-
-<style>
-.calc-box {
-  max-width: 500px;
-  margin: auto;
-  background: #0f0f0f;
-  padding: 40px;
-  border-radius: 12px;
-  color: white;
-}
-
-.calc-box label {
-  display: block;
-  margin-top: 20px;
-  color: #ccc;
-}
-
-.calc-box select,
-.calc-box input {
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  background: #1a1a1a;
-  color: white;
-}
-
-button {
-  margin-top: 20px;
-  padding: 15px;
-  width: 100%;
-  background: #2ecc71;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-#resultado {
-  margin-top: 30px;
-  padding: 20px;
-  background: #111;
-  border-radius: 10px;
-  color: #25D366;
-  font-weight: 500;
-}
-</style>
 
 <section id="experiencia">
 
@@ -429,11 +347,271 @@ style="border-radius:12px;border:none;">
 
 </div>
 
-</div>
+
+<section class="acustica-section">
+
+  <div class="container">
+
+    <h2>Ventanería Acústica en Bogotá</h2>
+    <p class="subtitle">
+      Reduce el ruido exterior hasta en un 80% con sistemas profesionales en aluminio y vidrio acústico.
+    </p>
+
+    <!-- GALERÍA -->
+    <div class="galeria">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498b" alt="">
+        <h3>Ventanas Corredizas</h3>
+        <p>Sistemas modernos que combinan estética, ventilación y aislamiento acústico.</p>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" alt="">
+        <h3>Vidrio Laminado</h3>
+        <p>Tecnología 3+3 y 4+4 que reduce vibraciones del sonido exterior.</p>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae" alt="">
+        <h3>Doble Vidrio (DVH)</h3>
+        <p>Cámara de aire interna que bloquea eficazmente el ruido.</p>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36" alt="">
+        <h3>Instalación Hermética</h3>
+        <p>Sellado profesional que garantiza el máximo rendimiento acústico.</p>
+      </div>
+    </div>
+
+    <!-- TABLA -->
+    <div class="tabla">
+      <h3>Nivel de Reducción de Ruido</h3>
+
+      <table>
+        <tr>
+          <th>Sistema</th>
+          <th>Reducción</th>
+        </tr>
+        <tr>
+          <td>Laminado 3+3</td>
+          <td>25 – 30 dB</td>
+        </tr>
+        <tr>
+          <td>Laminado 4+4</td>
+          <td>30 – 35 dB</td>
+        </tr>
+        <tr>
+          <td>DVH</td>
+          <td>35 – 45 dB</td>
+        </tr>
+        <tr>
+          <td>DVH + acústico</td>
+          <td>Hasta 50 dB</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- CALCULADORA -->
+    <div class="calc-box">
+      <h3>Calcula tu reducción de ruido</h3>
+
+      <label>Nivel exterior (dB): <span id="valorNivel">70</span></label>
+      <input type="range" id="nivel" min="40" max="100" value="70"
+        oninput="actualizarNivel(this.value)">
+
+      <label>Tipo de sistema:</label>
+      <select id="tipo">
+        <option value="30">Laminado 3+3</option>
+        <option value="35">Laminado 4+4</option>
+        <option value="40">DVH</option>
+        <option value="50">DVH + acústico</option>
+      </select>
+
+      <button onclick="calcular()">Calcular</button>
+
+      <div id="resultado"></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+      <h3>Cotiza en Bogotá</h3>
+      <p>Asesoría gratuita y diseño a medida.</p>
+      <a href="https://wa.me/573053399795" target="_blank">Cotizar por WhatsApp</a>
+    </div>
+
+  </div>
 
 </section>
 
-</section>
+<!-- BOTÓN FLOTANTE -->
+<a href="https://wa.me/573053399795" class="whatsapp-float" target="_blank">
+  💬
+</a>
+
+<style>
+
+.acustica-section {
+  background: #0b0b0b;
+  color: white;
+  padding: 80px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  font-size: 40px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #aaa;
+  margin-bottom: 50px;
+}
+
+/* GALERIA */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card h3 {
+  padding: 10px;
+}
+
+.card p {
+  padding: 0 10px 20px;
+  color: #ccc;
+}
+
+/* TABLA */
+.tabla {
+  margin-top: 60px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 15px;
+  border-bottom: 1px solid #333;
+}
+
+th {
+  color: #2ecc71;
+}
+
+/* CALCULADORA */
+.calc-box {
+  margin-top: 60px;
+  background: #111;
+  padding: 30px;
+  border-radius: 12px;
+}
+
+.calc-box input,
+.calc-box select {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  background: #1a1a1a;
+  border: none;
+  color: white;
+  border-radius: 8px;
+}
+
+.calc-box button {
+  margin-top: 20px;
+  padding: 15px;
+  width: 100%;
+  background: #2ecc71;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#resultado {
+  margin-top: 20px;
+  color: #25D366;
+  font-weight: bold;
+}
+
+/* CTA */
+.cta {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.cta a {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 15px 30px;
+  background: #25D366;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+/* BOTÓN FLOTANTE */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  font-size: 28px;
+  padding: 15px 18px;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+</style>
+
+<script>
+
+function actualizarNivel(valor){
+  document.getElementById("valorNivel").innerText = valor;
+}
+
+function calcular(){
+  let nivel = document.getElementById("nivel").value;
+  let reduccion = document.getElementById("tipo").value;
+
+  let interior = nivel - reduccion;
+
+  document.getElementById("resultado").innerHTML =
+    "Nivel interior estimado: <strong>" + interior + " dB</strong>";
+}
+
+</script>
+
 
 <section id="galeria">
 
@@ -653,11 +831,6 @@ update();
 
 });
 
-</script>
-
-`;
-
-document.getElementById("resultado").innerHTML = mensaje;
 
 }
 
