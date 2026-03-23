@@ -346,69 +346,7 @@ transform:scale(1.05);
 grid-template-columns:1fr;
 }
 }
-  <section id="calculadora-ruido">
-
-<h2 class="section-title">Calcula tu Nivel de Ruido</h2>
-
-<div class="calc-box">
-
-<label>Tipo de ruido:</label>
-
-<select id="tipoRuido">
-<option value="60">Tráfico moderado</option>
-<option value="75">Tráfico pesado</option>
-<option value="85">Discoteca / bares</option>
-<option value="95">Construcción / industrial</option>
-</select>
-
-<label>Nivel estimado (dB):</label>
-
-<input type="range" id="nivel" min="40" max="100" value="60" oninput="actualizarNivel(this.value)">
-<p id="valorNivel">60 dB</p>
-
-<button onclick="calcularRuido()" class="btn">
-Calcular aislamiento
-</button>
-
-<div id="resultado"></div>
-/* CALCULADORA */
-
-.calc-box{
-max-width:500px;
-margin:auto;
-background:#0f0f0f;
-padding:40px;
-border-radius:12px;
-text-align:left;
-}
-
-.calc-box label{
-display:block;
-margin-top:20px;
-color:#ccc;
-}
-
-.calc-box select,
-.calc-box input{
-width:100%;
-margin-top:10px;
-padding:10px;
-border-radius:8px;
-border:none;
-background:#1a1a1a;
-color:white;
-}
-
-#resultado{
-margin-top:30px;
-padding:20px;
-background:#111;
-border-radius:10px;
-color:#25D366;
-font-weight:500;
-}
-</div>
-
+ 
 </section>
 </head>
 
