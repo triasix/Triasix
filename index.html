@@ -314,52 +314,236 @@ color:#8c8c8c
 <div class="card"><h3>Barandas en Vidrio</h3></div>
 </div>
 </section>
-<section id="antiruido" class="antiruido">
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triasix | Antiruido</title>
+
+<style>
+
+/* RESET */
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#0a0a0a;
+color:#fff;
+}
+
+/* SECCION ANTIRUIDO */
+.antiruido{
+padding:100px 20px;
+}
+
+.antiruido-content{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+max-width:1200px;
+margin:auto;
+}
+
+.antiruido-text h2{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.antiruido-text p{
+color:#bbb;
+line-height:1.7;
+}
+
+.antiruido-text ul{
+margin-top:20px;
+color:#ccc;
+}
+
+.antiruido-text li{
+margin-bottom:10px;
+}
+
+/* BOTON */
+.btn{
+display:inline-block;
+margin-top:25px;
+padding:12px 25px;
+background:#00c2ff;
+color:#000;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* IMAGEN */
+.antiruido-img img{
+width:100%;
+border-radius:16px;
+}
+
+/* CALCULADORA */
+.calculadora{
+margin-top:60px;
+background:#111;
+padding:40px;
+border-radius:16px;
+max-width:600px;
+margin-left:auto;
+margin-right:auto;
+box-shadow:0 0 30px rgba(0,0,0,0.5);
+}
+
+.calculadora h3{
+text-align:center;
+margin-bottom:20px;
+}
+
+.calculadora input, .calculadora select{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:none;
+border-radius:8px;
+background:#222;
+color:#fff;
+}
+
+.calculadora button{
+width:100%;
+padding:14px;
+background:#00c2ff;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.resultado{
+margin-top:20px;
+font-size:18px;
+text-align:center;
+color:#00ffcc;
+}
+
+/* GALERIA */
+.antiruido-gallery{
+margin-top:60px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+max-width:1200px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.antiruido-gallery img{
+width:100%;
+border-radius:12px;
+transition:0.3s;
+}
+
+.antiruido-gallery img:hover{
+transform:scale(1.05);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+.antiruido-content{
+grid-template-columns:1fr;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="antiruido">
 
 <div class="antiruido-content">
 
 <div class="antiruido-text">
-
-<h2>Ventanas Acústicas (Antiruido)</h2>
+<h2>Soluciones Antiruido</h2>
 
 <p>
-Soluciones especializadas para reducir el ruido exterior en apartamentos,
-oficinas y espacios comerciales. Nuestros sistemas termoacústicos combinan
-vidrios laminados y perfilería de alta calidad para garantizar confort,
-aislamiento y diseño moderno.
+En Triasix desarrollamos sistemas en aluminio y vidrio laminado diseñados para 
+reducir significativamente el ruido exterior, mejorando el confort y la calidad de vida.
 </p>
 
 <ul>
-<li>✔ Reducción de ruido hasta 80%</li>
-<li>✔ Vidrio laminado 3+3 / 4+4</li>
-<li>✔ Sellado hermético profesional</li>
-<li>✔ Diseño moderno y elegante</li>
+<li>✔ Reducción de ruido hasta 70%</li>
+<li>✔ Vidrio laminado 3+3 y 4+4</li>
+<li>✔ Sellos herméticos</li>
+<li>✔ Diseño moderno</li>
 </ul>
 
-<a href="https://wa.me/573053399795" class="btn">
-Cotizar Ventanas Antiruido
-</a>
-
+<a href="#" class="btn">Cotizar Antiruido</a>
 </div>
 
 <div class="antiruido-img">
-
-<img src="antiruido1.jpg">
-
+<img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
 </div>
 
 </div>
 
+<!-- CALCULADORA -->
+<div class="calculadora">
+
+<h3>Calculadora Antiruido</h3>
+
+<input type="number" id="ancho" placeholder="Ancho en metros">
+<input type="number" id="alto" placeholder="Alto en metros">
+
+<select id="tipo">
+<option value="250000">Vidrio 3+3</option>
+<option value="320000">Vidrio 4+4</option>
+<option value="450000">Doble Cámara</option>
+</select>
+
+<button onclick="calcular()">Calcular Precio</button>
+
+<div class="resultado" id="resultado"></div>
+
+</div>
+
+<!-- GALERIA -->
 <div class="antiruido-gallery">
-
-<img src="antiruido1.jpg">
-<img src="antiruido2.jpg">
-<img src="antiruido3.jpg">
-<img src="antiruido4.jpg">
-
+<img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+<img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c">
+<img src="https://images.unsplash.com/photo-1600573472550-8090b5e0745e">
+<img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea">
 </div>
 
 </section>
+
+<script>
+
+function calcular(){
+let ancho = document.getElementById("ancho").value;
+let alto = document.getElementById("alto").value;
+let tipo = document.getElementById("tipo").value;
+
+if(ancho === "" || alto === ""){
+document.getElementById("resultado").innerHTML = "Ingresa medidas";
+return;
+}
+
+let area = ancho * alto;
+let precio = area * tipo;
+
+document.getElementById("resultado").innerHTML =
+"Área: " + area.toFixed(2) + " m²<br>Precio estimado: $" + precio.toLocaleString();
+
+}
+
+</script>
+
+</body>
+</html>
+```
+
 }
 </section>
 <!-- CATALOGO -->
