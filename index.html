@@ -664,11 +664,73 @@ document.getElementById("lightbox").style.display="none";
 
 </script>
 ```javascript
+
+  ```html
+<!-- MEDIDOR PRO CORREGIDO -->
+<div class="sound-meter-pro">
+
+<h3>Medidor + Cotización</h3>
+
+<div class="meter"><div id="barra"></div></div>
+
+<div id="db">0 dB</div>
+<div id="nivel">Nivel: Esperando...</div>
+<div id="estado">Presiona activar</div>
+
+<input type="number" id="ancho" placeholder="Ancho (m)">
+<input type="number" id="alto" placeholder="Alto (m)">
+
+<div id="cotizacion"></div>
+
+<button onclick="iniciarAudio()">Activar Micrófono</button>
+<button onclick="modoDemo()">Modo Demo</button>
+
+<a id="whatsappBtn" target="_blank">Enviar a WhatsApp</a>
+
+</div>
+
+<style>
+.sound-meter-pro{background:#111;padding:30px;border-radius:16px;max-width:600px;margin:auto;text-align:center;}
+.meter{height:20px;background:#222;border-radius:10px;margin:10px 0;}
+#barra{height:100%;width:0%;background:linear-gradient(90deg,#00ffcc,#ff0055);}
+input{width:100%;padding:10px;margin:5px 0;background:#222;color:#fff;border:none;}
+button{width:100%;padding:10px;margin-top:5px;background:#00c2ff;border:none;}
+#whatsappBtn{display:block;margin-top:10px;padding:10px;background:#25D366;color:#fff;text-decoration:none;}
+</style>
+
+<script>
+
+let audioContext, analyser, dataArray;
+
+// 🔊 MICROFONO
+async function iniciarAudio(){
+try{
+
+const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+
+audioContext = new AudioContext();
+analyser = audioContext.createAnalyser();
+
+const source = audioContext.createMediaStreamSource(stream);
+source.connect(analyser);
+
+analyser.fftSize = 512;
+dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+document.getElementById("estado").innerText="Micrófono activo";
+
+loop();
+
+}catch(e){
+document.getElementById("estado").innerText="ERROR: usa HTTPS o permite micrófono";
+}
+}
+
+// 🔁 LOOP
 function loop(){
 
 analyser.getByteFrequencyData(dataArray);
 
-// NIVEL GENERAL
 let sum = 0;
 for(let i=0;i<dataArray.length;i++){
 sum += dataArray[i];
@@ -676,58 +738,55 @@ sum += dataArray[i];
 
 let db = Math.round(sum / dataArray.length);
 
-// UI
-document.getElementById("db").innerText = db + " dB";
-document.getElementById("barraNivel").style.width = db + "%";
-
-// DIAGNOSTICO
-let nivel = "";
-if(db < 40) nivel = "Bajo";
-else if(db < 70) nivel = "Medio";
-else nivel = "Alto 🚨";
-
-// 🔥 MENSAJE WHATSAPP SIEMPRE ACTIVO
-let mensaje = `Medición de ruido:
-${db} dB
-Nivel: ${nivel}`;
-
-// 👉 SI HAY MEDIDAS
-let ancho = document.getElementById("ancho")?.value;
-let alto = document.getElementById("alto")?.value;
-
-if(ancho && alto){
-mensaje += `\nMedidas: ${ancho} x ${alto}`;
-}
-
-// 👉 ACTUALIZA BOTON
-document.getElementById("wsp").href =
-"https://wa.me/573053399795?text=" + encodeURIComponent(mensaje);
-
-
-// 🎚️ GRAFICA
-let canvas = document.getElementById("grafica");
-let ctx = canvas.getContext("2d");
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-let barWidth = canvas.width / dataArray.length;
-
-for(let i=0;i<dataArray.length;i++){
-
-let val = dataArray[i];
-let height = val;
-
-let x = i * barWidth;
-let y = canvas.height - height;
-
-ctx.fillStyle = `rgb(${val+50},100,255)`;
-ctx.fillRect(x, y, barWidth - 2, height);
-
-}
+actualizar(db);
 
 requestAnimationFrame(loop);
 }
+
+// 🎮 DEMO
+function modoDemo(){
+setInterval(()=>{
+let db = Math.floor(Math.random()*100);
+actualizar(db);
+},500);
+}
+
+// 💰 CALCULO
+function actualizar(db){
+
+document.getElementById("db").innerText=db+" dB";
+document.getElementById("barra").style.width=db+"%";
+
+// NIVEL
+let nivel="", precio=0;
+
+if(db<40){nivel="Bajo";precio=220000;}
+else if(db<70){nivel="Medio";precio=320000;}
+else{nivel="Alto";precio=450000;}
+
+document.getElementById("nivel").innerText="Nivel: "+nivel;
+
+// MEDIDAS
+let a = parseFloat(document.getElementById("ancho").value);
+let b = parseFloat(document.getElementById("alto").value);
+
+let texto = "Ruido: "+db+" dB - Nivel: "+nivel;
+
+// SI HAY MEDIDAS
+if(a>0 && b>0){
+let total = a*b*precio;
+
+document.getElementById("cotizacion").innerText =
+"Precio: $" + total.toLocaleString();
+
+texto += " | Medidas: "+a+"x"+b+" | Precio: $"+total.toLocaleString();
+}
+
+// WHATSAPP SIEMPRE ACTIVO
+document.getElementById("whatsappBtn").href =
+"https://wa.me/573000000000?text="+encodeURIComponent(texto);
+
+}
+
+</script>
 ```
-
-
-
