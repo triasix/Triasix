@@ -663,70 +663,71 @@ document.getElementById("lightbox").style.display="none";
 }
 
 </script>
+```javascript
+function loop(){
 
-</body>
-</html>
-```html id="finalmedidorok"
-<!-- MEDIDOR PRO COMPLETO FUNCIONAL -->
+analyser.getByteFrequencyData(dataArray);
 
-<div class="sound-pro">
-
-<h3>Diagnóstico Acústico Inteligente</h3>
-
-<div class="meter">
-  <div id="barra"></div>
-</div>
-
-<div id="db">0 dB</div>
-<div id="nivel">Nivel: -</div>
-<div id="diagnostico">Diagnóstico: esperando medición</div>
-
-<!-- 🔥 GRAFICA -->
-<canvas id="grafica" height="100"></canvas>
-
-<input type="number" id="ancho" placeholder="Ancho (m)">
-<input type="number" id="alto" placeholder="Alto (m)">
-
-<div id="precio"></div>
-
-<button onclick="activarAudio()">Activar Medición</button>
-<button onclick="modoDemo()">Modo Demo</button>
-
-<a id="wsp" target="_blank">Enviar diagnóstico</a>
-
-</div>
-
-<style>
-
-.sound-pro{
-background:#111;
-padding:25px;
-border-radius:16px;
-text-align:center;
-max-width:600px;
-margin:auto;
-color:#fff;
+// NIVEL GENERAL
+let sum = 0;
+for(let i=0;i<dataArray.length;i++){
+sum += dataArray[i];
 }
 
-.meter{
-height:20px;
-background:#222;
-border-radius:10px;
-margin:10px 0;
-overflow:hidden;
+let db = Math.round(sum / dataArray.length);
+
+// UI
+document.getElementById("db").innerText = db + " dB";
+document.getElementById("barraNivel").style.width = db + "%";
+
+// DIAGNOSTICO
+let nivel = "";
+if(db < 40) nivel = "Bajo";
+else if(db < 70) nivel = "Medio";
+else nivel = "Alto 🚨";
+
+// 🔥 MENSAJE WHATSAPP SIEMPRE ACTIVO
+let mensaje = `Medición de ruido:
+${db} dB
+Nivel: ${nivel}`;
+
+// 👉 SI HAY MEDIDAS
+let ancho = document.getElementById("ancho")?.value;
+let alto = document.getElementById("alto")?.value;
+
+if(ancho && alto){
+mensaje += `\nMedidas: ${ancho} x ${alto}`;
 }
 
-#barra{
-height:100%;
-width:0%;
-background:linear-gradient(90deg,#00ffcc,#ff0055);
-transition:0.2s;
+// 👉 ACTUALIZA BOTON
+document.getElementById("wsp").href =
+"https://wa.me/573000000000?text=" + encodeURIComponent(mensaje);
+
+
+// 🎚️ GRAFICA
+let canvas = document.getElementById("grafica");
+let ctx = canvas.getContext("2d");
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+let barWidth = canvas.width / dataArray.length;
+
+for(let i=0;i<dataArray.length;i++){
+
+let val = dataArray[i];
+let height = val;
+
+let x = i * barWidth;
+let y = canvas.height - height;
+
+ctx.fillStyle = `rgb(${val+50},100,255)`;
+ctx.fillRect(x, y, barWidth - 2, height);
+
 }
 
-input{
-width:100%;
-padding:10px;
-margin:5px 0;
-background:
+requestAnimationFrame(loop);
+}
 ```
+
+
 
