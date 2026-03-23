@@ -608,131 +608,159 @@ document.getElementById("resultado").innerHTML =
 
 </div>
 ```html id="medidorprofinal"
+```html
+<!-- MEDIDOR PRO + DIAGNOSTICO INGENIERO (MOVIL READY) -->
+<div class="sound-pro">
 
-  ```html
-<!-- MEDIDOR PRO CORREGIDO -->
-<div class="sound-meter-pro">
-
-<h3>Medidor + Cotización</h3>
+<h3>Diagnóstico Acústico Inteligente</h3>
 
 <div class="meter"><div id="barra"></div></div>
 
 <div id="db">0 dB</div>
-<div id="nivel">Nivel: Esperando...</div>
-<div id="estado">Presiona activar</div>
+<div id="nivel">Nivel: -</div>
+<div id="diagnostico">Diagnóstico: esperando medición</div>
 
 <input type="number" id="ancho" placeholder="Ancho (m)">
 <input type="number" id="alto" placeholder="Alto (m)">
 
-<div id="cotizacion"></div>
+<div id="precio"></div>
 
-<button onclick="iniciarAudio()">Activar Micrófono</button>
+<button onclick="activarAudio()">Activar Medición</button>
 <button onclick="modoDemo()">Modo Demo</button>
 
-<a id="whatsappBtn" target="_blank">Enviar a WhatsApp</a>
+<a id="wsp" target="_blank">Enviar diagnóstico</a>
 
 </div>
 
 <style>
-.sound-meter-pro{background:#111;padding:30px;border-radius:16px;max-width:600px;margin:auto;text-align:center;}
-.meter{height:20px;background:#222;border-radius:10px;margin:10px 0;}
-#barra{height:100%;width:0%;background:linear-gradient(90deg,#00ffcc,#ff0055);}
-input{width:100%;padding:10px;margin:5px 0;background:#222;color:#fff;border:none;}
-button{width:100%;padding:10px;margin-top:5px;background:#00c2ff;border:none;}
-#whatsappBtn{display:block;margin-top:10px;padding:10px;background:#25D366;color:#fff;text-decoration:none;}
+.sound-pro{background:#111;padding:25px;border-radius:16px;text-align:center;max-width:600px;margin:auto}
+.meter{height:20px;background:#222;border-radius:10px;margin:10px 0}
+#barra{height:100%;width:0;background:linear-gradient(90deg,#00ffcc,#ff0055)}
+input{width:100%;padding:10px;margin:5px 0;background:#222;color:#fff;border:none}
+button{width:100%;padding:12px;margin-top:5px;background:#00c2ff;border:none}
+#wsp{display:block;margin-top:10px;background:#25D366;padding:10px;color:#fff;text-decoration:none}
+#diagnostico{margin-top:10px;color:#ccc}
 </style>
 
 <script>
 
-let audioContext, analyser, dataArray;
+let ctx, analyser, data;
 
-// 🔊 MICROFONO
-async function iniciarAudio(){
+// ACTIVAR AUDIO (COMPATIBLE MOVIL)
+async function activarAudio(){
+
 try{
+
+ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+// 🔥 CLAVE PARA IPHONE
+if(ctx.state === "suspended"){
+await ctx.resume();
+}
 
 const stream = await navigator.mediaDevices.getUserMedia({audio:true});
 
-audioContext = new AudioContext();
-analyser = audioContext.createAnalyser();
+analyser = ctx.createAnalyser();
+const source = ctx.createMediaStreamSource(stream);
 
-const source = audioContext.createMediaStreamSource(stream);
 source.connect(analyser);
 
 analyser.fftSize = 512;
-dataArray = new Uint8Array(analyser.frequencyBinCount);
+data = new Uint8Array(analyser.frequencyBinCount);
 
-document.getElementById("estado").innerText="Micrófono activo";
-
-loop();
+medir();
 
 }catch(e){
-document.getElementById("estado").innerText="ERROR: usa HTTPS o permite micrófono";
-}
-}
-
-// 🔁 LOOP
-function loop(){
-
-analyser.getByteFrequencyData(dataArray);
-
-let sum = 0;
-for(let i=0;i<dataArray.length;i++){
-sum += dataArray[i];
+alert("Micrófono bloqueado. Usa modo demo o activa permisos.");
 }
 
-let db = Math.round(sum / dataArray.length);
-
-actualizar(db);
-
-requestAnimationFrame(loop);
 }
 
-// 🎮 DEMO
+// LOOP
+function medir(){
+
+analyser.getByteFrequencyData(data);
+
+let avg = data.reduce((a,b)=>a+b,0)/data.length;
+let db = Math.round(avg);
+
+procesar(db);
+
+requestAnimationFrame(medir);
+}
+
+// DEMO
 function modoDemo(){
 setInterval(()=>{
-let db = Math.floor(Math.random()*100);
-actualizar(db);
-},500);
+let db = Math.floor(Math.random()*90);
+procesar(db);
+},600);
 }
 
-// 💰 CALCULO
-function actualizar(db){
+// PROCESO INGENIERO
+function procesar(db){
 
-document.getElementById("db").innerText=db+" dB";
-document.getElementById("barra").style.width=db+"%";
+dbText.innerText = db+" dB";
+barra.style.width = db+"%";
 
-// NIVEL
-let nivel="", precio=0;
+// CLASIFICACION TECNICA
+let nivel, sistema, descripcion, precioM2;
 
-if(db<40){nivel="Bajo";precio=220000;}
-else if(db<70){nivel="Medio";precio=320000;}
-else{nivel="Alto";precio=450000;}
-
-document.getElementById("nivel").innerText="Nivel: "+nivel;
-
-// MEDIDAS
-let a = parseFloat(document.getElementById("ancho").value);
-let b = parseFloat(document.getElementById("alto").value);
-
-let texto = "Ruido: "+db+" dB - Nivel: "+nivel;
-
-// SI HAY MEDIDAS
-if(a>0 && b>0){
-let total = a*b*precio;
-
-document.getElementById("cotizacion").innerText =
-"Precio: $" + total.toLocaleString();
-
-texto += " | Medidas: "+a+"x"+b+" | Precio: $"+total.toLocaleString();
+if(db < 35){
+nivel="Ambiente silencioso";
+sistema="No requiere intervención";
+descripcion="Condiciones acústicas óptimas";
+precioM2=0;
+}
+else if(db < 55){
+nivel="Ruido moderado";
+sistema="Vidrio laminado 3+3";
+descripcion="Afectación leve, mejora recomendada";
+precioM2=220000;
+}
+else if(db < 75){
+nivel="Ruido alto";
+sistema="Vidrio 4+4 hermético";
+descripcion="Afectación significativa";
+precioM2=320000;
+}
+else{
+nivel="Ruido crítico 🚨";
+sistema="Doble cámara acústica";
+descripcion="Intervención obligatoria";
+precioM2=450000;
 }
 
-// WHATSAPP SIEMPRE ACTIVO
-document.getElementById("whatsappBtn").href =
-"https://wa.me/573053399795?text="+encodeURIComponent(texto);
+nivelEl.innerText = nivel;
+
+document.getElementById("diagnostico").innerHTML =
+"Sistema recomendado: "+sistema+"<br>"+descripcion;
+
+// CALCULO
+let a = ancho.value;
+let b = alto.value;
+
+let texto = `Diagnóstico acústico:
+${db} dB
+${nivel}
+Sistema: ${sistema}`;
+
+if(a && b && precioM2>0){
+let total = a*b*precioM2;
+
+precio.innerHTML = "Inversión estimada: $" + total.toLocaleString();
+
+texto += `\nMedidas: ${a}x${b}\nPrecio: $${total.toLocaleString()}`;
+}
+
+// WHATSAPP
+wsp.href="https://wa.me/573000000000?text="+encodeURIComponent(texto);
 
 }
 
 </script>
+```
+
 ```
 
 </div>
