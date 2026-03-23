@@ -607,162 +607,70 @@ document.getElementById("resultado").innerHTML =
 </div>
 
 </div>
-```html id="medidorprofinal"
-```javascript
+<script>
+
 let audioContext, analyser, source;
 let dataArray;
 let animacion;
 
 // ACTIVAR MICROFONO
 async function iniciarAudio(){
+  try{
 
-try{
+    if(audioContext){
+      cancelAnimationFrame(animacion);
+      audioContext.close();
+    }
 
-// 🔥 SI YA EXISTE, REINICIAR
-if(audioContext){
-cancelAnimationFrame(animacion);
-audioContext.close();
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    if(audioContext.state === "suspended"){
+      await audioContext.resume();
+    }
+
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio:{
+        echoCancellation:true,
+        noiseSuppression:true,
+        autoGainControl:true
+      }
+    });
+
+    analyser = audioContext.createAnalyser();
+    source = audioContext.createMediaStreamSource(stream);
+    source.connect(analyser);
+
+    analyser.fftSize = 512;
+    dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+    document.getElementById("estado").innerText = "Micrófono activo";
+
+    loop();
+
+  }catch(e){
+    document.getElementById("estado").innerText = "Error permisos o HTTPS";
+  }
 }
 
-audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-// 🔥 CLAVE PARA MOVILES
-if(audioContext.state === "suspended"){
-await audioContext.resume();
-}
-
-const stream = await navigator.mediaDevices.getUserMedia({
-audio:{
-echoCancellation:true,
-noiseSuppression:true,
-autoGainControl:true
-}
-});
-
-analyser = audioContext.createAnalyser();
-source = audioContext.createMediaStreamSource(stream);
-
-source.connect(analyser);
-
-analyser.fftSize = 512;
-dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-document.getElementById("estado").innerText = "Micrófono activo";
-
-loop();
-
-}catch(e){
-document.getElementById("estado").innerText =
-"Error: revisa permisos o usa HTTPS";
-console.error(e);
-}
-
-}
-
-// LOOP ESTABLE
 function loop(){
+  if(!analyser) return;
 
-if(!analyser) return;
+  analyser.getByteFrequencyData(dataArray);
 
-analyser.getByteFrequencyData(dataArray);
+  let sum = 0;
+  for(let i=0;i<dataArray.length;i++){
+    sum += dataArray[i];
+  }
 
-// 🔥 MEJOR CALCULO DE dB
-let sum = 0;
-for(let i=0;i<dataArray.length;i++){
-sum += dataArray[i];
+  let db = Math.round(sum / dataArray.length);
+
+  document.getElementById("db").innerText = db + " dB";
+  document.getElementById("barra").style.width = db + "%";
+
+  animacion = requestAnimationFrame(loop);
 }
 
-let avg = sum / dataArray.length;
-let db = Math.round(avg);
-
-actualizarUI(db);
-
-animacion = requestAnimationFrame(loop);
-}
-
-// DEMO (SEGURA)
-function modoDemo(){
-
-cancelAnimationFrame(animacion);
-
-function sim(){
-let db = Math.floor(Math.random()*90)+10;
-actualizarUI(db);
-animacion = requestAnimationFrame(sim);
-}
-
-sim();
-}
-
-// ACTUALIZAR UI (NO TOCAR SI YA FUNCIONA)
-function actualizarUI(db){
-
-document.getElementById("db").innerText = db + " dB";
-document.getElementById("barra").style.width = db + "%";
-
-// NIVEL
-let nivelTexto = "", precioM2 = 0;
-
-if(db < 40){
-nivelTexto = "Bajo";
-precioM2 = 220000;
-}
-else if(db < 70){
-nivelTexto = "Medio";
-precioM2 = 320000;
-}
-else{
-nivelTexto = "Alto 🚨";
-precioM2 = 450000;
-}
-
-let nivelEl = document.getElementById("nivel");
-nivelEl.innerText = "Nivel: " + nivelTexto;
-nivelEl.style.color = db > 70 ? "#ff0055" : "#ccc";
-
-// CALCULO
-let a = parseFloat(document.getElementById("ancho").value);
-let b = parseFloat(document.getElementById("alto").value);
-
-if(a > 0 && b > 0){
-let total = a * b * precioM2;
-
-document.getElementById("cotizacion").innerHTML =
-"Precio: $" + total.toLocaleString();
-
-let mensaje = `Ruido: ${db} dB
-Nivel: ${nivelTexto}
-Medidas: ${a} x ${b}
-Precio: $${total.toLocaleString()}`;
-
-document.getElementById("whatsappBtn").href =
-"https://wa.me/573000000000?text=" + encodeURIComponent(mensaje);
-}
-
-// GRAFICA (FIX CLAVE)
-let canvas = document.getElementById("grafica");
-if(!canvas) return;
-
-let ctx = canvas.getContext("2d");
-
-if(!window.historial) window.historial = [];
-
-historial.push(db);
-if(historial.length > 50) historial.shift();
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-ctx.beginPath();
-
-historial.forEach((v,i)=>{
-let x = (i / 50) * canvas.width;
-let y = canvas.height - (v * 1.2);
-ctx.lineTo(x,y);
-});
-
-ctx.strokeStyle = "#00c2ff";
-ctx.lineWidth = 2;
-ctx.stroke();
-
+</script>
 }
 ```
 
